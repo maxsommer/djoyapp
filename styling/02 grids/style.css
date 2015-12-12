@@ -1,0 +1,49 @@
+*{
+	box-sizing: border-box;
+}
+
+body{
+	background-color: #A10702;
+	font-family: Helvetica Neue;
+	font-size: 2rem;
+	padding: 2rem;
+	color: #efefef;
+	font-weight: 300;
+}
+
+p{
+	font-size: 1.25rem;
+}
+
+.filled{
+	display: block;
+	position: relative;
+	padding-left: 0.5rem;
+	padding-right: 0.5rem;
+	height: 6rem;
+
+	background-color: grey;
+	border: 1px solid white;
+
+	line-height: 3rem;
+}
+
+
+
+@media only screen and (min-width: 40rem){
+
+	body{ background-color: #688E26; }
+
+	.filled{
+		height: 9rem;
+	}
+
+}
+
+
+
+@media only screen and (min-width: 64rem){
+
+	body{ background-color: #004777; }
+
+}

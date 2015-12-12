@@ -1,0 +1,46 @@
+*{
+	box-sizing: border-box;
+}
+
+/*
+*	man geht beim responsive webdesign meistens von dem kleinst möglichen
+*	gerät aus von dem die webseite / applikation benutzt werden können soll.
+*	die befehle die jetzt folgen sind ganz normales css und beschreiben quasi
+*	wie die seite "standardmäßig" aussehen soll - weil unser standardfall eben
+*	ein smartphone ist wird es eben einfach als ganz normales kommando interpretiert.
+*/
+
+body{
+	background-color: #A10702;
+	font-family: Helvetica Neue;
+	font-size: 2rem;
+	padding: 2rem;
+	color: #efefef;
+	font-weight: 300;
+}
+
+/*
+*	mit dem folgenden befehl sagt man dem browser
+*	"hey wenn dein bildschirm breiter als 768px (normale auflösung von tablets) ist dann nimm
+*	doch bitte zu den befehlen die oben drüber sind noch die befehler hier in den klammern dazu :)"
+*	der browser erkennt dann automatisch wenn man irgendwie eine styling eigenschaft von
+*	vorher überschrieben hat. in dem fall machen wir das mit der hintergrunfarbe der webseite
+* 	die erst rot bei smartphones ist, dann wird sie grün bei tablets usw und bei normalen pcs
+*	und laptops wird sie blau :)
+*/
+
+@media only screen and (min-width: 768px){
+
+	body{ background-color: #688E26; }
+
+}
+
+/*
+*	gleicher spaß, nur nochmal eben für größere bildschirme :9
+*/
+
+@media only screen and (min-width: 1024px){
+
+	body{ background-color: #004777; }
+
+}
