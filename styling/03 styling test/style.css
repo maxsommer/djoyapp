@@ -27,8 +27,9 @@ nav{
 	position: fixed;
 	display: block;
 	cursor: pointer;
+	overflow: hidden;
 
-	width: auto;
+	width: 86px;
 	height: 40px;
 	top: 20px;
 	left: 0px;
