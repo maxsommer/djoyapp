@@ -130,6 +130,7 @@ input[type="checkbox"]:checked + label + .dot {
 	display: block;
 	position: fixed;
 	cursor: pointer;
+	z-index: 101;
 
 	width: 60px;
 	height: 60px;
