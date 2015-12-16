@@ -11,26 +11,34 @@ body {
 	text-align: center;
 	font-size: 15pt;
 }
+#logo {
+
+}
 #description {
 	float: auto;
-	width: 70%;
+	width: 50%;
 	color: black;
 	text-align: center;
 	margin-right: auto;
   	margin-left: auto;
   	margin-top: 100px;
 }
+#description p{
+	margin-top: 20px;
+	color: #5b604f;
+}
+#description h2{
+	color: #5b604f;
+}
 li {
 	display: inline-block;
 }
 li p {
 	position: relative;
-	top: 15px;
 	font-family: "Georgia", Times, serif;
 	color: #fff;
 	font-size: 20pt;
 	text-align: center;
-	margin-top: auto;
 }
 ul {
 	background: linear-gradient(#dd404a, #bd1c25);
@@ -42,12 +50,28 @@ ul {
 	float: center;
 	padding: 15px;
 }
-li a {
-    display: block;
-    color: #fff;
-    text-align: right;
-    padding: 8px 0 8px 16px;
+#login {
+	background: white;
+	position: absolute;
+	text-align: center;
+	font-size: 12pt;
+	border-color: black;
+	border: 1px;
+	right: 10px;
+	top: 15px;
+	padding: 5px;
+	-moz-border-radius: 15px;
+	-webkit-border-radius: 5px;
+	height: 30px;
+	width: 60px;
+
+    color: #dd404a;
+
     text-decoration: none;
+}
+#login:hover{
+	background: #dd404a;
+	color: white;
 }
 li a:hover {
     color: black;
@@ -61,4 +85,5 @@ li a:hover {
 	-webkit-border-radius: 8px;
 	padding: 20px;
 	border: none;
+	overflow: visible;
 }
