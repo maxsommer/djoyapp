@@ -1,0 +1,64 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+header {
+
+}
+body {
+	color: black;
+	background: #e5e7e2;
+	text-align: center;
+	font-size: 15pt;
+}
+#description {
+	float: auto;
+	width: 70%;
+	color: black;
+	text-align: center;
+	margin-right: auto;
+  	margin-left: auto;
+  	margin-top: 100px;
+}
+li {
+	display: inline-block;
+}
+li p {
+	position: relative;
+	top: 15px;
+	font-family: "Georgia", Times, serif;
+	color: #fff;
+	font-size: 20pt;
+	text-align: center;
+	margin-top: auto;
+}
+ul {
+	background: linear-gradient(#dd404a, #bd1c25);
+    width: 100%;
+	font-family: "Georgia",Times,serif;
+	font-size: 10pt;
+	font-style: italic;
+	list-style: none;
+	float: center;
+	padding: 15px;
+}
+li a {
+    display: block;
+    color: #fff;
+    text-align: right;
+    padding: 8px 0 8px 16px;
+    text-decoration: none;
+}
+li a:hover {
+    color: black;
+}
+#go {
+	margin-top: 50px;
+	color: white;
+	font-size: 15pt;
+	background: linear-gradient(#dd404a, #bd1c25);
+	-moz-border-radius: 15px;
+	-webkit-border-radius: 8px;
+	padding: 20px;
+	border: none;
+}
