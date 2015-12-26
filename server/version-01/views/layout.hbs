@@ -2,9 +2,59 @@
 <html>
   <head>
     <title>{{title}}</title>
+    <link rel="stylesheet" href="stylesheets/normalize.css" type="text/css" />
+    <link rel="stylesheet" href="/stylesheets/grid.css" type="text/css" />
     <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel="stylesheet" href="stylesheets/font-awesome-4.5.0/css/font-awesome.min.css" type="text/css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   </head>
   <body>
-    {{{body}}}
+        <nav>
+
+             <h2>Menu</h2>
+
+             <div class="navsetting">
+                   <a href="/"><i class="fa fa-compass fa-fw"></i>&nbsp; Radar</a>
+             </div>
+             <div class="navsetting">
+                   <a href="/"><i class="fa fa-info-circle fa-fw"></i>&nbsp; Guide</a></a>
+             </div>
+             <div class="navsetting">
+                   <a href="/"><i class="fa fa-sign-out fa-fw"></i>&nbsp; Logout</a></a>
+             </div>
+
+             <h2>Settings</h2>
+
+
+             <div class="navsetting">
+                    <i class="fa fa-bell fa-fw"></i>&nbsp; Push Notifications</a>
+                    <div class="navsettingtoggle">
+                          <input type="checkbox" id="push">
+                          <label for="push"><span></span></label>
+                          <div class="dot">&nbsp;</div>
+                    </div>
+             </div>
+
+
+             <div class="navsetting">
+                    <i class="fa fa-map-marker fa-fw"></i>&nbsp; Location</a>
+                    <div class="navsettingtoggle">
+                          <input type="checkbox" id="push2">
+                          <label for="push2"><span></span></label>
+                          <div class="dot">&nbsp;</div>
+                    </div>
+             </div>
+
+
+        </nav>
+
+        <div id="navtoggle"><i class="fa fa-navicon fa-fw"></i>&nbsp;menu</a></div>
+
+        <main>
+              {{{body}}}
+              <div id="actionButton">+</div>
+        </main>
+
+    <script src="javascripts/main.js"></script>
   </body>
 </html>
