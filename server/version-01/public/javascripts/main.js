@@ -10,6 +10,7 @@
 	var nav = document.querySelector('nav');
 	var navtoggle = document.querySelector('#navtoggle');
 	var meSymbolText = document.querySelector("#meSymbolText");
+	var actionButton = document.querySelector("#actionButton");
 
 	/*
 	*	Öffnen der Navigation
@@ -31,7 +32,9 @@
 	/*
 	*	Location laden und senden
 	*/
-	getLocation();
+	actionButton.addEventListener("click", function(){
+		getLocation();
+	});
 
 
 	/*
@@ -48,7 +51,7 @@
 
 		});
 	}
-	
+
 }());
 
 
@@ -96,11 +99,11 @@ function getLocation() {
 }
 function sendPosition(position) {
 	ajaxPost(
-			"latitude=" + position.coords.latitude + "+longitude=" + position.coords.longitude,
+			"latitude=" + position.coords.latitude + "&longitude=" + position.coords.longitude + "",
 			"http://localhost:3000/radar",
-			function(){
+			function( text ){
 
-				console.log(position);
+				console.log( text );
 
 			}
 		);

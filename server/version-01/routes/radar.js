@@ -1,9 +1,60 @@
 var express = require('express');
+var sqlite3 = require('sqlite3');
+
 var router = express.Router();
 
 router.post('/', function(req, res, next) {
-  //res.send( req.body.data );
-  res.send( req.body );
+	// in req.body stehen die aktuellen location daten
+	// diese lesen wir aus und verwenden sie hier dann weiter
+
+	var kilometerScale = 1.0;
+
+	var currentPosition 		= {};
+	currentPosition.longitude 	= Number(req.body.longitude);
+	currentPosition.latitude 	= Number(req.body.latitude);
+
+
+	// jetzt speichern wir hier einmal 4 positionen ab
+	// die den umkreis (ca 1km) abstecken sollen in dem gesucht wird
+	var northPosition 			= {};
+	northPosition.longitude 		= currentPosition.longitude;
+	northPosition.latitude 			= currentPosition.latitude + 0.01 * kilometerScale;
+	var southPosition 			= {};
+	southPosition.longitude 		= currentPosition.longitude;
+	southPosition.latitude 			= currentPosition.latitude - 0.01 * kilometerScale;
+	var westPosition 				= {};
+	westPosition.longitude 			= currentPosition.longitude - 0.015 * kilometerScale;
+	westPosition.latitude 			= currentPosition.latitude;
+	var eastPosition 				= {};
+	eastPosition.longitude 			= currentPosition.longitude + 0.015 * kilometerScale;
+	eastPosition.latitude 			= currentPosition.latitude;
+
+
+		// verbindung zur datenbank aufbauen
+		var db = new sqlite3.Database('../database.db', function(error){
+
+			if(error != null){
+				console.log("Datenbankverbindung konnte nicht aufgebaut werden ");
+			}
+			else{
+
+				db.each("SELECT * FROM events WHERE locationLongitude < ? AND locationLongitude > ?", [ eastPosition.longitude, westPosition.longitude ], function(err, row){
+					if (err) {
+						console.log("Error: \n");
+						console.log( err.message + "\n " + err );
+					}
+					else{
+						console.log( row );
+					}
+				});
+
+			}
+
+		});
+
+		db.close();
+
+  	res.send( "Die Geolocation Daten wurden auf dem Server aktualisiert, es wird nach passenden Events in der Nähe gesucht." );
 });
 
 router.get('/', function(req, res, next) {
