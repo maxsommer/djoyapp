@@ -19,14 +19,17 @@ OSX: Open the terminal and navigate to the folder you saved the project in and r
 
 ##Done:
 ###Version 0.13: 
-* Upon refresh only events that are new are added to the clients local list of events which means there are no more duplications
+* Upon refresh only events that are new are added to the clients local list of events which means there are no more duplications  
+
 ###Version 0.12:  
 * Events are now filtered by distance (~1km) and time (6hours)
 * Client now displays events as red dots, relative to your position
 * Refresh button added
-* Refresh sound triggers when clicking the button
-###Version 0.11:  
-* Server now sends an array of JSON objects to client which contains events near you.  
+* Refresh sound triggers when clicking the button  
+
+###Version 0.11: 
+* Server now sends an array of JSON objects to client which contains events near you. 
+
 ###Version 0.1:  
 * SQlite3
 * Database.db
