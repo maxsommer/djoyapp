@@ -7,9 +7,10 @@ header {
 }
 body {
 	color: black;
-	background: #e5e7e2;
+	background: ;
 	text-align: center;
 	font-size: 15pt;
+	font-family: 'Lato', sans-serif;
 }
 #logo {
 
@@ -20,7 +21,7 @@ body {
 	color: black;
 	text-align: center;
 	margin-right: auto;
-  	margin-left: auto;
+	margin-left: auto;
   	margin-top: 100px;
 }
 #description p{
@@ -28,6 +29,7 @@ body {
 	color: #5b604f;
 }
 #description h2{
+	margin-top:10px;
 	color: #5b604f;
 }
 li {
@@ -35,7 +37,7 @@ li {
 }
 li p {
 	position: relative;
-	font-family: "Georgia", Times, serif;
+	font-family: 'Georgia', Times, serif;
 	color: #fff;
 	font-size: 20pt;
 	text-align: center;
@@ -43,7 +45,7 @@ li p {
 ul {
 	background: linear-gradient(#dd404a, #bd1c25);
     width: 100%;
-	font-family: "Georgia",Times,serif;
+	font-family: 'Georgia', Times, serif;
 	font-size: 10pt;
 	font-style: italic;
 	list-style: none;
@@ -72,6 +74,7 @@ ul {
 #login:hover{
 	background: #dd404a;
 	color: white;
+	cursor: pointer;
 }
 li a:hover {
     color: black;
@@ -86,4 +89,5 @@ li a:hover {
 	padding: 20px;
 	border: none;
 	overflow: visible;
+	cursor: pointer;
 }
