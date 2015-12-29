@@ -23,5 +23,7 @@ https://github.com/jeromeetienne/webaudiox
 MomentJS
 http://momentjs.com/  
 Octave
-https://github.com/scopegate/octave/  
+https://github.com/scopegate/octave/   
+SQLite3 
+https://github.com/mapbox/node-sqlite3/wiki/API
 
