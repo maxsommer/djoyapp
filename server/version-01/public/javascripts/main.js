@@ -1,3 +1,12 @@
+//	variables
+var currentEvents = [];
+var currentTime = moment().unix();
+
+// create WebAudio API context
+var context = new AudioContext();
+// Create lineOut
+var lineOut = new WebAudiox.LineOut(context);
+
 (function(){
 
 	/*
@@ -5,6 +14,7 @@
 	*	12. Dezember 2015
 	*/
 
+	//	elements
 	var dot = document.querySelectorAll('.dot');
 	var checkbox = document.querySelectorAll('input[type=checkbox]');
 	var nav = document.querySelector('nav');
@@ -58,12 +68,6 @@
 }());
 
 
-// create WebAudio API context
-var context = new AudioContext()
-// Create lineOut
-var lineOut = new WebAudiox.LineOut(context)
-
-
 /*
 *	AJAX daten laden
 */
@@ -115,24 +119,108 @@ function sendPosition(position) {
 				events = JSON.parse( events );
 
 				if( events.length === 0 ){
-					console.log("Leider gibt es aktuell keine Events in deiner Nähe.");
+					console.log("Leider gibt es aktuell keine neuen Events in deiner Nähe.");
 				}
 				else{
-					events.forEach(function(event){
+					var addedEventCounter = 0;
 
-						var eventPositionX = event.locationLongitude;
-						var eventPositionY = event.locationLatitude;
+					if(currentEvents.length === 0){
+						events.forEach(function(event){
 
-						var currentPositionX = position.coords.longitude;
-						var currentPositionY = position.coords.latitude;
+							//	in die liste der aktuell angezeigten events mit aufnehmen
+							currentEvents.push( event );
 
-						var eventPositionScreenX = eventPositionX.map( currentPositionX-0.015, currentPositionX+0.015, 0, 100 );
-						var eventPositionScreenY = eventPositionY.map( currentPositionY-0.01, currentPositionY+0.01, 0, 100 );
-						console.log( eventPositionScreenX + "\n" + eventPositionScreenY );
+							// 	die Bildschirmposition des Events wird hier bestimmt
+								var eventPositionX = event.locationLongitude;
+								var eventPositionY = event.locationLatitude;
 
-						eventContainer.innerHTML += "<a class=\"event\" href=\"/details/" + event.id + "\" style=\"left: "+ eventPositionScreenX +"%; bottom: "+ eventPositionScreenY +"%\"></a>";
+								var currentPositionX = position.coords.longitude;
+								var currentPositionY = position.coords.latitude;
 
-					});
+								var eventPositionScreenX = eventPositionX.map( currentPositionX-0.015, currentPositionX+0.015, 0, 100 );
+								var eventPositionScreenY = eventPositionY.map( currentPositionY-0.01, currentPositionY+0.01, 0, 100 );
+
+							//	zeitliche Nähe bestimmen
+								//var
+
+							//	 das Event wird auf dem Bildschirm hinzugefügt
+							eventContainer.innerHTML += "<a class=\"event\" href=\"/details/" + event.id + "\" style=\"left: "+ eventPositionScreenX +"%; bottom: "+ eventPositionScreenY +"%\"></a>";
+
+							//	statusmeldung
+							console.log("Event #"+event.id+" wurde zur Karte hinzugefügt.");
+							addedEventCounter++;
+
+						});
+						if( addedEventCounter === 1 ){ console.log("1 Event wurde zur Karte hinzugefügt."); }
+						else{console.log( addedEventCounter + " Events wurden zur Karte hinzugefügt." );}
+						addedEventCounter = 0;
+					}
+					else{
+
+						/*
+						*	Hier wird zunächst geprüft ob die einzufügenende
+						*	Elemente schon vorhanden sind. Falls ja, werden
+						*	diese nicht eingefügt.
+						*/
+
+						var tests = [];
+						for(var i=0;i<events.length;i++){tests.push(0);}
+
+						for(var i=0; i<events.length; i++){
+							event = events[i];
+
+							for(var j=0; j<currentEvents.length; j++){
+
+								exEvent = currentEvents[j];
+								if( event.id === exEvent.id ){
+									tests[i] = 1;
+								}else{
+								}
+
+
+							}
+
+						}
+
+						for(var i=0;i<tests.length;i++){
+
+							event = events[i];
+
+							if(tests[i] === 0){
+								//	das event hinzufügen
+								currentEvents.push( event );
+
+								// 	die Bildschirmposition des Events wird hier bestimmt
+									var eventPositionX = event.locationLongitude;
+									var eventPositionY = event.locationLatitude;
+
+									var currentPositionX = position.coords.longitude;
+									var currentPositionY = position.coords.latitude;
+
+									var eventPositionScreenX = eventPositionX.map( currentPositionX-0.015, currentPositionX+0.015, 0, 100 );
+									var eventPositionScreenY = eventPositionY.map( currentPositionY-0.01, currentPositionY+0.01, 0, 100 );
+
+								//	zeitliche Nähe bestimmen
+									//var
+
+								//	 das Event wird auf dem Bildschirm hinzugefügt
+								eventContainer.innerHTML += "<a class=\"event\" href=\"/details/" + event.id + "\" style=\"left: "+ eventPositionScreenX +"%; bottom: "+ eventPositionScreenY +"%\"></a>";
+
+								//	statusmeldung
+								console.log("Event #"+event.id+" wurde zur Karte hinzugefügt.");
+								addedEventCounter++;
+							}
+							else{
+								console.log("Event #"+event.id+" wurde nicht hinzugefügt, da es bereits auf der Karte zu finden ist.");
+							}
+
+						}
+
+						if( addedEventCounter === 1 ){ console.log("1 Event wurde zur Karte hinzugefügt."); }
+						else{console.log( addedEventCounter + " Events wurden zur Karte hinzugefügt." );}
+						addedEventCounter = 0;
+
+					}
 				}
 
 			}
