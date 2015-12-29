@@ -24,6 +24,7 @@ var lineOut = new WebAudiox.LineOut(context);
 	var refreshButton = document.querySelector("#refreshButton");
 	var eventContainer = document.querySelector("#eventContainer");
 
+
 	/*
 	*	Öffnen der Navigation
 	*/
