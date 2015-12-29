@@ -17,11 +17,11 @@ https://fortawesome.github.io/Font-Awesome/icons/
 normalize.css
 https://necolas.github.io/normalize.css/  
 Adam Kaplans Grid (we know they recommend not using this for production, but we're prototyping!)
-http://adamkaplan.me/grid/
-WebAudioX  
-https://github.com/jeromeetienne/webaudiox
-MomentJS  
-http://momentjs.com/
-Octave  
-https://github.com/scopegate/octave/
+http://adamkaplan.me/grid/  
+WebAudioX
+https://github.com/jeromeetienne/webaudiox  
+MomentJS
+http://momentjs.com/  
+Octave
+https://github.com/scopegate/octave/  
 
