@@ -11,6 +11,8 @@
 	var navtoggle = document.querySelector('#navtoggle');
 	var meSymbolText = document.querySelector("#meSymbolText");
 	var actionButton = document.querySelector("#actionButton");
+	var refreshButton = document.querySelector("#refreshButton");
+	var eventContainer = document.querySelector("#eventContainer");
 
 	/*
 	*	Öffnen der Navigation
@@ -32,7 +34,8 @@
 	/*
 	*	Location laden und senden
 	*/
-	actionButton.addEventListener("click", function(){
+	refreshButton.addEventListener("click", function(){
+		playSound("tap.mp3");
 		getLocation();
 	});
 
@@ -53,6 +56,12 @@
 	}
 
 }());
+
+
+// create WebAudio API context
+var context = new AudioContext()
+// Create lineOut
+var lineOut = new WebAudiox.LineOut(context)
 
 
 /*
@@ -101,10 +110,48 @@ function sendPosition(position) {
 	ajaxPost(
 			"latitude=" + position.coords.latitude + "&longitude=" + position.coords.longitude + "",
 			"http://localhost:3000/radar",
-			function( text ){
+			function( events ){
 
-				console.log( text );
+				events = JSON.parse( events );
+
+				if( events.length === 0 ){
+					console.log("Leider gibt es aktuell keine Events in deiner Nähe.");
+				}
+				else{
+					events.forEach(function(event){
+
+						var eventPositionX = event.locationLongitude;
+						var eventPositionY = event.locationLatitude;
+
+						var currentPositionX = position.coords.longitude;
+						var currentPositionY = position.coords.latitude;
+
+						var eventPositionScreenX = eventPositionX.map( currentPositionX-0.015, currentPositionX+0.015, 0, 100 );
+						var eventPositionScreenY = eventPositionY.map( currentPositionY-0.01, currentPositionY+0.01, 0, 100 );
+						console.log( eventPositionScreenX + "\n" + eventPositionScreenY );
+
+						eventContainer.innerHTML += "<a class=\"event\" href=\"/details/" + event.id + "\" style=\"left: "+ eventPositionScreenX +"%; bottom: "+ eventPositionScreenY +"%\"></a>";
+
+					});
+				}
 
 			}
 		);
+}
+
+Number.prototype.map = function ( in_min , in_max , out_min , out_max ) {
+  return ( this - in_min ) * ( out_max - out_min ) / ( in_max - in_min ) + out_min;
+}
+
+function playSound( soundname ){
+	// load a sound and play it immediatly
+	WebAudiox.loadBuffer(context, 'sounds/' + soundname, function(buffer){
+	    // init AudioBufferSourceNode
+	    var source  = context.createBufferSource();
+	    source.buffer   = buffer
+	    source.connect(lineOut.destination)
+
+	    // start the sound now
+	    source.start(0);
+	});
 }

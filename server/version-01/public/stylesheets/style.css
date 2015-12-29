@@ -175,6 +175,41 @@ input[type="checkbox"]:checked + label + .dot {
 	transition: .25s;
 }
 
+#refreshButton{
+	display: block;
+	position: fixed;
+	cursor: pointer;
+	z-index: 101;
+
+	width: 60px;
+	height: 60px;
+	bottom: 20px;
+	right: 100px;
+
+	background-color: #54ca41;
+	border-radius: 100%;
+	box-shadow: 0px 2px 7px rgba(0,0,0,.25);
+
+	text-align: center;
+	color: #efefef;
+	font-weight: 700;
+	font-size: 3rem;
+	line-height: 56px;
+
+	transition: .25s;
+}
+#refreshButton:hover{
+	box-shadow: 0px 5px 15px rgba(0,0,0,.25);
+	transition: .25s;
+}
+#refreshButton:active{
+	background-color: #efefef;
+
+	color: #54ca41;
+
+	transition: .25s;
+}
+
 #meSymbol{
       display: block;
       position: absolute;
@@ -207,6 +242,27 @@ input[type="checkbox"]:checked + label + .dot {
       border-bottom: 1px solid rgba(0,0,0,.1);
 
       text-align: center;
+}
+
+#eventContainer{
+      display: block;
+      position: absolute;
+
+      width: 100vw;
+      height: 100vh;
+      left: 0px;
+      top: 0px;
+}
+
+a.event{
+      display: block;
+      position: absolute;
+
+      width: 1rem;
+      height: 1rem;
+
+      background-color: rgba(255, 0, 0, .8);
+      border-radius: 100%;
 }
 
 

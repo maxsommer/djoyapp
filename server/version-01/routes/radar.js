@@ -1,5 +1,6 @@
 var express = require('express');
 var sqlite3 = require('sqlite3');
+var moment = require('moment');
 
 var router = express.Router();
 
@@ -12,6 +13,9 @@ router.post('/', function(req, res, next) {
 	var currentPosition 		= {};
 	currentPosition.longitude 	= Number(req.body.longitude);
 	currentPosition.latitude 	= Number(req.body.latitude);
+
+	var currentTime			= moment().unix();
+	var filterTime			= currentTime + ( 60 * 60 * 6 ); // 6 Stunden im voraus ..
 
 	var events = [];
 
@@ -40,7 +44,7 @@ router.post('/', function(req, res, next) {
 			}
 			else{
 
-				db.all("SELECT * FROM events WHERE locationLongitude < ? AND locationLongitude > ?", [ eastPosition.longitude, westPosition.longitude ], function(err, rows){
+				db.all("SELECT * FROM events WHERE locationLongitude < ? AND locationLongitude > ? AND time < ? AND time > ?", [ eastPosition.longitude, westPosition.longitude, filterTime, currentTime ], function(err, rows){
 					if (err) {
 						console.log("Error: \n");
 						console.log( err.message + "\n " + err );
