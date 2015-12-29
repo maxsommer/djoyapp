@@ -15,7 +15,7 @@ OSX: Open the terminal and navigate to the folder you saved the project in and r
 ##To Do:
 ###Version ~0.4:
 * Introduction / Tutorial
-* 
+* Navigation
 
 ###Version ~0.3:
 * Recommendations
