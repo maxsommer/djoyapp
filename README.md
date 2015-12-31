@@ -32,13 +32,15 @@ OSX: Open the terminal and navigate to the folder you saved the project in and r
 * Share
 
 ####Version 0.14:  
-* Remove old entries when they are not relevant any more.
 * Add a new event
-* AJAX handler vor asyncronous site loading 
+* AJAX handler vor asyncronous site loading
 * AJAX load 'new event' page
 
 ##Done:
-####Version 0.13: 
+####Version 0.141:
+* Remove old entries when they are not relevant any more.
+
+####Version 0.13:
 * Upon refresh only events that are new are added to the clients local list of events which means there are no more duplications  
 
 ####Version 0.12:  
@@ -47,8 +49,8 @@ OSX: Open the terminal and navigate to the folder you saved the project in and r
 * Refresh button added
 * Refresh sound triggers when clicking the button  
 
-####Version 0.11: 
-* Server now sends an array of JSON objects to client which contains events near you. 
+####Version 0.11:
+* Server now sends an array of JSON objects to client which contains events near you.
 
 ###Version 0.1:  
 * SQlite3
@@ -70,6 +72,5 @@ MomentJS
 http://momentjs.com/  
 Octave
 https://github.com/scopegate/octave/   
-SQLite3 
+SQLite3
 https://github.com/mapbox/node-sqlite3/wiki/API
-

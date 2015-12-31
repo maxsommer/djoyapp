@@ -7,6 +7,16 @@ var context = new AudioContext();
 // Create lineOut
 var lineOut = new WebAudiox.LineOut(context);
 
+//	elements
+var dot = document.querySelectorAll('.dot');
+var checkbox = document.querySelectorAll('input[type=checkbox]');
+var nav = document.querySelector('nav');
+var navtoggle = document.querySelector('#navtoggle');
+var meSymbolText = document.querySelector("#meSymbolText");
+var actionButton = document.querySelector("#actionButton");
+var refreshButton = document.querySelector("#refreshButton");
+var eventContainer = document.querySelector("#eventContainer");
+
 (function(){
 
 	/*
@@ -14,15 +24,17 @@ var lineOut = new WebAudiox.LineOut(context);
 	*	12. Dezember 2015
 	*/
 
-	//	elements
-	var dot = document.querySelectorAll('.dot');
-	var checkbox = document.querySelectorAll('input[type=checkbox]');
-	var nav = document.querySelector('nav');
-	var navtoggle = document.querySelector('#navtoggle');
-	var meSymbolText = document.querySelector("#meSymbolText");
-	var actionButton = document.querySelector("#actionButton");
-	var refreshButton = document.querySelector("#refreshButton");
-	var eventContainer = document.querySelector("#eventContainer");
+	//	Echtzeitausführung
+	window.setInterval(function(){
+
+		//	lokale Zeit aktualisieren
+		currentTime = moment().unix();
+
+		//	gibt es Events, die nicht mehr auf dem Bildschirm angezeigt
+		//	werden sollten weil sie schon nicht mehr aktuell sind?
+		checkEvents();
+
+	}, 10000);
 
 
 	/*
@@ -226,6 +238,42 @@ function sendPosition(position) {
 
 			}
 		);
+}
+
+function checkEvents(){
+
+	var tests = [];
+	for(var i=0;i<currentEvents.length;i++){tests.push(0);}
+
+	if( currentEvents.length != 0 ){
+
+		for( var i=0; i < currentEvents.length; i++ ){
+			var event = currentEvents[i];
+
+			if( event.time < currentTime ){
+				tests[i] = 1;
+			}
+
+		}
+
+	}
+	for(var i=0;i < currentEvents.length;i++){
+		var anzeige = currentEvents[i].id;
+		if(tests[i] === 1){
+
+			//	event aus der internen liste herausstreichen
+			currentEvents.splice(i, 1);
+
+			//	event aus der darstellung herausnehmen
+			var element = document.querySelector("a.event[href='/details/"+ i +"']");
+			eventContainer.removeChild( element );
+
+			//	Statusanzeige
+			console.log("Event #" + anzeige + " ist nicht mehr aktuell und wurde von der Karte entfernt.");
+
+		}
+	}
+
 }
 
 Number.prototype.map = function ( in_min , in_max , out_min , out_max ) {
