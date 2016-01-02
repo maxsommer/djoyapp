@@ -7,11 +7,6 @@ Djoya is going to be an app that helps you find out what to do here and right no
 OSX: Open the terminal and navigate to the folder you saved the project in and run the following command:   
 ``` DEBUG=version-01:* npm start ```  
 
-##How to add an event:
-* Step 1: Open database.db which is to be found in the root directory with sqlitebrowser.
-* Step 2: Open Google Maps / any map service that lets you find out your geolocation and copy the information.
-* Step 3: Add a new row to table events and paste the information.
-
 ##To Do:
 ###Version ~0.4:
 * Introduction / Tutorial
