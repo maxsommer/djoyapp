@@ -29,7 +29,7 @@ var newEventSubmit;
 	*	12. Dezember 2015
 	*/
 
-	getLocation();
+	updateLocation(updateEvents);
 
 	//	Echtzeitausführung
 	window.setInterval(function(){
@@ -37,11 +37,23 @@ var newEventSubmit;
 		//	lokale Zeit aktualisieren
 		currentTime = moment().unix();
 
+
 		//	gibt es Events, die nicht mehr auf dem Bildschirm angezeigt
 		//	werden sollten weil sie schon nicht mehr aktuell sind?
 		checkEvents();
 
+		//	neue events laden
+		updateEvents();
+
 	}, 10000);
+
+	//	Echtzeitausführung
+	window.setInterval(function(){
+
+		//	ort aktualisieren
+		updateLocation();
+
+	}, 60000);
 
 
 	/*
@@ -59,14 +71,6 @@ var newEventSubmit;
 			navtoggle.style.left = "0px";
 		}
 
-	});
-
-	/*
-	*	Location laden und senden
-	*/
-	refreshButton.addEventListener( "click", function(){
-		playSound( "tap.mp3" );
-		getLocation();
 	});
 
 	actionButton.addEventListener( "click", function(){
@@ -160,17 +164,9 @@ function ajaxPost( datastring, url, callback ){
 
 }
 
-function getLocation() {
-    if (navigator.geolocation) {
-	  navigator.geolocation.getCurrentPosition(sendPosition);
-    } else {
-	  meSymbolText.innerHTML = "Geolocation is not supported by this browser.";
-    }
-}
-
 function updateLocation(){
     	if (navigator.geolocation) {
-	  	navigator.geolocation.getCurrentPosition(function(){
+	  	navigator.geolocation.getCurrentPosition(function(position){
 			currentLocation.latitude = position.coords.latitude;
 			currentLocation.longitude = position.coords.longitude;
 		});
@@ -179,13 +175,22 @@ function updateLocation(){
   	}
 }
 
-function sendPosition(position) {
+function updateLocation(callback){
+    	if (navigator.geolocation) {
+	  	navigator.geolocation.getCurrentPosition(function(position){
+			currentLocation.latitude = position.coords.latitude;
+			currentLocation.longitude = position.coords.longitude;
+			callback();
+		});
+    	} else {
+	  	meSymbolText.innerHTML = "Geolocation is not supported by this browser.";
+  	}
+}
 
-	currentLocation.latitude = position.coords.latitude;
-	currentLocation.longitude = position.coords.longitude;
+function updateEvents(){
 
 	ajaxPost(
-			"latitude=" + position.coords.latitude + "&longitude=" + position.coords.longitude + "",
+			"latitude=" + currentLocation.latitude + "&longitude=" + currentLocation.longitude + "",
 			"http://localhost:3000/radar",
 			function( events ){
 
@@ -207,8 +212,8 @@ function sendPosition(position) {
 								var eventPositionX = event.locationLongitude;
 								var eventPositionY = event.locationLatitude;
 
-								var currentPositionX = position.coords.longitude;
-								var currentPositionY = position.coords.latitude;
+								var currentPositionX = currentLocation.longitude;
+								var currentPositionY = currentLocation.latitude;
 
 								var eventPositionScreenX = eventPositionX.map( currentPositionX-0.015, currentPositionX+0.015, 0, 100 );
 								var eventPositionScreenY = eventPositionY.map( currentPositionY-0.01, currentPositionY+0.01, 0, 100 );
@@ -224,8 +229,6 @@ function sendPosition(position) {
 							addedEventCounter++;
 
 						});
-						if( addedEventCounter === 1 ){ console.log("1 Event wurde zur Karte hinzugefügt."); }
-						else{console.log( addedEventCounter + " Events wurden zur Karte hinzugefügt." );}
 						addedEventCounter = 0;
 					}
 					else{
@@ -267,8 +270,8 @@ function sendPosition(position) {
 									var eventPositionX = event.locationLongitude;
 									var eventPositionY = event.locationLatitude;
 
-									var currentPositionX = position.coords.longitude;
-									var currentPositionY = position.coords.latitude;
+									var currentPositionX = currentLocation.longitude;
+									var currentPositionY = currentLocation.latitude;
 
 									var eventPositionScreenX = eventPositionX.map( currentPositionX-0.015, currentPositionX+0.015, 0, 100 );
 									var eventPositionScreenY = eventPositionY.map( currentPositionY-0.01, currentPositionY+0.01, 0, 100 );
@@ -284,13 +287,13 @@ function sendPosition(position) {
 								addedEventCounter++;
 							}
 							else{
-								console.log("Event #"+event.id+" wurde nicht hinzugefügt, da es bereits auf der Karte zu finden ist.");
+								//console.log("Event #"+event.id+" wurde nicht hinzugefügt, da es bereits auf der Karte zu finden ist.");
 							}
 
 						}
 
-						if( addedEventCounter === 1 ){ console.log("1 Event wurde zur Karte hinzugefügt."); }
-						else{console.log( addedEventCounter + " Events wurden zur Karte hinzugefügt." );}
+						//if( addedEventCounter === 1 ){ console.log("1 Event wurde zur Karte hinzugefügt."); }
+						//else{console.log( addedEventCounter + " Events wurden zur Karte hinzugefügt." );}
 						addedEventCounter = 0;
 
 					}
@@ -298,6 +301,7 @@ function sendPosition(position) {
 
 			}
 		);
+
 }
 
 function checkEvents(){
@@ -325,7 +329,7 @@ function checkEvents(){
 			currentEvents.splice(i, 1);
 
 			//	event aus der darstellung herausnehmen
-			var element = document.querySelector("a.event[href='/details/"+ i +"']");
+			var element = document.querySelector("a.event[href='/details/"+ anzeige +"']");
 			eventContainer.removeChild( element );
 
 			//	Statusanzeige

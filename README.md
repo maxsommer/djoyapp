@@ -32,6 +32,11 @@ OSX: Open the terminal and navigate to the folder you saved the project in and r
 * Share
 
 ##Done:
+####Version 0.150:
+* Client auto-updates event radar every 10 seconds
+* Client auto-updates location every minute
+* Removed obsolete update button
+
 ####Version 0.142:
 * Client side included jQuery for UI manipulations & easy AJAX
 * Add a new Event (template for form and server-side)
