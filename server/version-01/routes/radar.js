@@ -44,7 +44,7 @@ router.post('/', function(req, res, next) {
 			}
 			else{
 
-				db.all("SELECT * FROM events WHERE locationLongitude < ? AND locationLongitude > ? AND time < ? AND time > ?", [ eastPosition.longitude, westPosition.longitude, filterTime, currentTime ], function(err, rows){
+				db.all("SELECT * FROM events WHERE locationLongitude < ? AND locationLongitude > ? AND locationLatitude < ? AND locationLatitude > ? AND time < ? AND time > ?", [ eastPosition.longitude, westPosition.longitude, northPosition.latitude, southPosition.latitude, filterTime, currentTime ], function(err, rows){
 					if (err) {
 						console.log("Error: \n");
 						console.log( err.message + "\n " + err );

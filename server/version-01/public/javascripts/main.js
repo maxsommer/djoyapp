@@ -1,6 +1,10 @@
 //	variables
 var currentEvents = [];
 var currentTime = moment().unix();
+var currentLocation = [];
+var currentMarkers = [];
+var currentMarkerLocation = {};
+var mapNewEvent;
 
 // create WebAudio API context
 var context = new AudioContext();
@@ -16,6 +20,7 @@ var meSymbolText = document.querySelector("#meSymbolText");
 var actionButton = document.querySelector("#actionButton");
 var refreshButton = document.querySelector("#refreshButton");
 var eventContainer = document.querySelector("#eventContainer");
+var newEventSubmit;
 
 (function(){
 
@@ -23,6 +28,8 @@ var eventContainer = document.querySelector("#eventContainer");
 	*	Djoya; Styling Test;
 	*	12. Dezember 2015
 	*/
+
+	getLocation();
 
 	//	Echtzeitausführung
 	window.setInterval(function(){
@@ -57,9 +64,47 @@ var eventContainer = document.querySelector("#eventContainer");
 	/*
 	*	Location laden und senden
 	*/
-	refreshButton.addEventListener("click", function(){
-		playSound("tap.mp3");
+	refreshButton.addEventListener( "click", function(){
+		playSound( "tap.mp3" );
 		getLocation();
+	});
+
+	actionButton.addEventListener( "click", function(){
+		playSound( "tap.mp3" );
+		$( "#ajaxLoadedContent" ).load( "/new", function(){
+
+			$( "#ajaxLoadedContent" ).slideDown( 300 );
+			initializeMap();
+
+			//	Event listener für abschicken des formulars
+			newEventSubmit = document.querySelector("#neweventsubmit");
+			newEventSubmit.addEventListener("click", function(){
+
+				var eventTitle 		= document.querySelector("input[name=title]").value;
+				var eventDescription 	= document.querySelector("textarea[name=description]").value;
+				var eventPrice 		= document.querySelector("input[name=price]").value;
+				var eventTime 		= document.querySelector("input[name=time]").value;
+				var eventLocation		= currentMarkerLocation;
+
+				$.post(
+					"/new/process",
+					{
+						title: eventTitle,
+						description: eventDescription,
+						price: eventPrice,
+						time: eventTime,
+						lat: eventLocation.lat,
+						lng: eventLocation.lng
+					},
+					function( data ){
+
+						$('#ajaxLoadedContent').html( data );
+
+					});
+
+			});
+
+		} );
 	});
 
 
@@ -115,7 +160,6 @@ function ajaxPost( datastring, url, callback ){
 
 }
 
-
 function getLocation() {
     if (navigator.geolocation) {
 	  navigator.geolocation.getCurrentPosition(sendPosition);
@@ -123,7 +167,23 @@ function getLocation() {
 	  meSymbolText.innerHTML = "Geolocation is not supported by this browser.";
     }
 }
+
+function updateLocation(){
+    	if (navigator.geolocation) {
+	  	navigator.geolocation.getCurrentPosition(function(){
+			currentLocation.latitude = position.coords.latitude;
+			currentLocation.longitude = position.coords.longitude;
+		});
+    	} else {
+	  	meSymbolText.innerHTML = "Geolocation is not supported by this browser.";
+  	}
+}
+
 function sendPosition(position) {
+
+	currentLocation.latitude = position.coords.latitude;
+	currentLocation.longitude = position.coords.longitude;
+
 	ajaxPost(
 			"latitude=" + position.coords.latitude + "&longitude=" + position.coords.longitude + "",
 			"http://localhost:3000/radar",
@@ -291,4 +351,36 @@ function playSound( soundname ){
 	    // start the sound now
 	    source.start(0);
 	});
+}
+
+function initializeMap() {
+
+	var mapNewEvent = new google.maps.Map(document.getElementById('mapnewevent'), {
+	    center: {lat: currentLocation.latitude, lng: currentLocation.longitude},
+	    scrollwheel: false,
+	    zoom: 15
+	});
+
+	google.maps.event.addListener( mapNewEvent, "click", function(event){
+		placeMarkerAndPanTo( event.latLng, mapNewEvent );
+	} );
+
+}
+
+function placeMarkerAndPanTo(latLng, map) {
+	if( currentMarkers.length != 0 )
+  		setMapOnAll(null);
+  	var marker = new google.maps.Marker({
+    		position: latLng,
+    		map: map
+  	});
+	currentMarkerLocation.lat = marker.getPosition().lat();
+	currentMarkerLocation.lng = marker.getPosition().lng();
+  	currentMarkers.push( marker );
+  	map.panTo( latLng );
+}
+function setMapOnAll(map) {
+	  for (var i = 0; i < currentMarkers.length; i++) {
+	    	currentMarkers[i].setMap(map);
+	  }
 }

@@ -265,6 +265,93 @@ a.event{
       border-radius: 100%;
 }
 
+#ajaxLoadedContent{
+      display: none;
+      position: absolute;
+
+      width: 96vw;
+      height: auto;
+      left: 2vw;
+      top: 2vh;
+      padding-top: 1rem;
+      padding-bottom: 1rem;
+
+      background-color: #efefef;
+      border-radius: 2px;
+      box-shadow: 0px 0px 15px rgba( 0, 0, 0, .1);
+
+      z-index: 999;
+}
+
+#ajaxLoadedContent input[type="text"], #ajaxLoadedContent input[type="number"], #ajaxLoadedContent input[type="time"]{
+      width: 90%;
+      left: 5%;
+      padding: 0.5rem;
+      margin-left: 1rem;
+      margin-top: 1rem;
+
+      border: 0;
+      border-radius: 2px;
+}
+#ajaxLoadedContent input[type="text"][name="title"]{
+}
+
+#ajaxLoadedContent textarea{
+      width: 90%;
+      left: 5%;
+      padding: 0.5rem;
+      margin-left: 1rem;
+      margin-top: 1rem;
+
+      border: 0;
+      border-radius: 2px;
+      resize: none;
+      overflow: hidden;
+}
+
+#mapnewevent{
+      margin-top: 1rem;
+      height: 20rem;
+}
+
+#neweventsubmit{
+      display: inline-block;
+      position: relative;
+      float: right;
+
+      width: auto;
+      height: auto;
+      margin-top: 1rem;
+      margin-right: 1rem;
+      margin-left: 1rem;
+      padding: 0.5rem;
+
+      background-color: #fff;
+      box-shadow: 0px 0px 7px rgba(0,0,0,.1);
+      border: 0;
+      border-radius: 2px;
+
+      color: #333;
+      font-weight: 500;
+      font-size: 1.2rem;
+
+      transition: .25s;
+}
+#neweventsubmit:hover{
+      background-color: #333;
+      color: #fff;
+      transition: .25s;
+      cursor: pointer;
+}
+
+#ajaxLoadedContent p.error{
+
+      background-color: #ee4d59;
+      padding: 1rem;
+      color: #efefef;
+
+}
+
 
 @media only screen and (min-width: 40rem){
 

@@ -31,12 +31,11 @@ OSX: Open the terminal and navigate to the folder you saved the project in and r
 * Media
 * Share
 
-####Version 0.14:  
-* Add a new event
-* AJAX handler vor asyncronous site loading
-* AJAX load 'new event' page
-
 ##Done:
+####Version 0.142:
+* Client side included jQuery for UI manipulations & easy AJAX
+* Add a new Event (template for form and server-side)
+
 ####Version 0.141:
 * Remove old entries when they are not relevant any more.
 
@@ -57,6 +56,9 @@ OSX: Open the terminal and navigate to the folder you saved the project in and r
 * Database.db
 * Search for all events in radius of 1km
 * HTML / CSS / JS Base from interface tests
+
+##Known Bugs:  
+* Add Event: When adding a new event and submitting while not having entered every field (apart from price) an error appears above the form. The map inside the form does not reload.
 
 ##Thanks to all contributors and folks out there helping these projects we use:
 
