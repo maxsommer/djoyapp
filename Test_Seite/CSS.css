@@ -12,8 +12,87 @@ body {
 	font-size: 15pt;
 	font-family: 'Lato', sans-serif;
 }
-#logo {
+nav {
+	height: 40px;
+    width: 100%;
+    background: linear-gradient(#dd404a, #bd1c25);
+    font-size: 11pt;
+    font-family: 'Lato', sans-serif;
+    font-weight: bold;
+    position: relative;
+}
+nav ul {
+    padding: 0;
+    margin: 0 auto;
+    width: 600px;
+    height: 40px;
+}
+nav li {
+    display: inline;
+    float: left;
+}
+nav a {
+    color: #fff;
+    display: inline-block;
+    width: 100px;
+    text-align: center;
+    text-decoration: none;
+    line-height: 40px;
+}
+nav li a {
+    box-sizing:border-box;
+    -moz-box-sizing:border-box;
+    -webkit-box-sizing:border-box;
+}
+nav li:last-child a {
+    border-right: 0;
+}
+nav a:hover, nav a:active {
+    background-color: linear-gradient(#dd404a, #bd1c25);
+}
+nav a#pull {
+	display: none;
+}
+@media only screen and (max-width : 600px) {
+	nav {
+		border-bottom: 0;
+		height: auto;
+	}
+	nav ul {
+		width: 100%;
+		display: none;
+		height: auto;
+	}
+	nav a {
+	  	text-align: left;
+	  	width: 100%;
+	  	text-indent: 25px;
+  	}
+	nav a#pull {
+		display: block;
+		background-color: linear-gradient(#dd404a, #bd1c25);
+		width: 100%;
+		position: relative;
+	}
+	nav a#pull:after {
+		content:"";
+		background: url('nav-icon.png') no-repeat;
+		width: 30px;
+		height: 30px;
+		text-align: center;
+		display: inline-block;
+		position: absolute;
+		right: 15px;
+		top: 10px;
+	}
+}
 
+@media only screen and (max-width : 480px) {
+	nav li {
+		display: block;
+		float: none;
+		width: 100%;
+	}
 }
 #description {
 	float: auto;
@@ -31,26 +110,6 @@ body {
 #description h2{
 	margin-top:10px;
 	color: #5b604f;
-}
-li {
-	display: inline-block;
-}
-li p {
-	position: relative;
-	font-family: 'Georgia', Times, serif;
-	color: #fff;
-	font-size: 20pt;
-	text-align: center;
-}
-ul {
-	background: linear-gradient(#dd404a, #bd1c25);
-    width: 100%;
-	font-family: 'Georgia', Times, serif;
-	font-size: 10pt;
-	font-style: italic;
-	list-style: none;
-	float: center;
-	padding: 15px;
 }
 #login {
 	background: white;
@@ -90,4 +149,16 @@ li a:hover {
 	border: none;
 	overflow: visible;
 	cursor: pointer;
+}
+
+.clearfix:before,
+.clearfix:after {
+    content: " ";
+    display: block;
+}
+.clearfix:after {
+    clear: both;
+}
+.clearfix {
+    *zoom: 1;
 }
