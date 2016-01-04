@@ -2,6 +2,7 @@
 var currentEvents = [];
 var currentTime = moment().unix();
 var currentLocation = [];
+var currentLocationSet = false;
 var currentMarkers = [];
 var currentMarkerLocation = {};
 var mapNewEvent;
@@ -187,10 +188,15 @@ function ajaxPost( datastring, url, callback ){
 }
 
 function updateLocation( callback ){
+
+	currentLocation.latitude 	= 49.930070;
+	currentLocation.longitude 	= 8.931786;
+
     	if (navigator.geolocation) {
 	  	navigator.geolocation.getCurrentPosition(function(position){
 			currentLocation.latitude = position.coords.latitude;
 			currentLocation.longitude = position.coords.longitude;
+			currentLocationSet = true;
 
 			if( typeof callback === 'function' ){
 				callback();
@@ -373,15 +379,30 @@ function playSound( soundname ){
 
 function initializeMap() {
 
-	var mapNewEvent = new google.maps.Map(document.getElementById('mapnewevent'), {
-	    center: {lat: currentLocation.latitude, lng: currentLocation.longitude},
-	    scrollwheel: false,
-	    zoom: 15
-	});
+	if( currentLocationSet === false ){
 
-	google.maps.event.addListener( mapNewEvent, "click", function(event){
-		placeMarkerAndPanTo( event.latLng, mapNewEvent );
-	} );
+		var mapNewEvent = new google.maps.Map(document.getElementById('mapnewevent'), {
+		    center: {lat: 49.930070, lng: 8.931786},
+		    scrollwheel: false,
+		    zoom: 4
+		});
+
+		google.maps.event.addListener( mapNewEvent, "click", function(event){
+			placeMarkerAndPanTo( event.latLng, mapNewEvent );
+		} );
+
+	}
+	else{
+		var mapNewEvent = new google.maps.Map(document.getElementById('mapnewevent'), {
+		    center: {lat: currentLocation.latitude, lng: currentLocation.longitude},
+		    scrollwheel: false,
+		    zoom: 15
+		});
+
+		google.maps.event.addListener( mapNewEvent, "click", function(event){
+			placeMarkerAndPanTo( event.latLng, mapNewEvent );
+		} );
+	}
 
 }
 

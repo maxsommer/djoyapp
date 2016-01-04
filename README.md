@@ -31,6 +31,7 @@ OSX: Open the terminal and navigate to the folder you saved the project in and r
 * Details page for events is now available
 * Initial loading time for events should be better now
 * Animations for transitions
+* Version 0.151b: Several bugfixes
 
 ####Version 0.150:
 * Client auto-updates event radar every 10 seconds
