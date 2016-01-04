@@ -8,7 +8,6 @@ header {
 body {
 	color: black;
 	background: ;
-	text-align: center;
 	font-size: 15pt;
 	font-family: 'Lato', sans-serif;
 }
@@ -76,7 +75,7 @@ nav a#pull {
 	}
 	nav a#pull:after {
 		content:"";
-		background: url('nav-icon.png') no-repeat;
+		background: url('/bilder/nav-icon.png') no-repeat;
 		width: 30px;
 		height: 30px;
 		text-align: center;
@@ -102,41 +101,61 @@ nav a#pull {
 	margin-right: auto;
 	margin-left: auto;
   	margin-top: 100px;
+	color: #5b604f;
+	height:100%;
 }
-#description p{
+#project {
 	margin-top: 20px;
-	color: #5b604f;
+	margin-right: auto;
+	margin-left: auto;
+	float:auto;
+	padding: 10px;
+    left: 33%;
+    top: 20%;
+    width: 33%;
+  	color: black;
+  	font-size: 12px;
+  	height:100%;
 }
-#description h2{
-	margin-top:10px;
-	color: #5b604f;
+#description a:link{
+	color:black; background-color:transparent; text-decoration:underline
 }
-#login {
-	background: white;
-	position: absolute;
+#description a:visited{
+	color:black; background-color:transparent; text-decoration:underline
+}
+
+#impressum {
+	margin-top: auto;
+	padding: 10px;
+    position: relative;
+    left: 50%;
+    top: 10%;
+    width: 25%;
+  	color: black;
+  	font-size: 12px;
+  	height:100%;
+}
+h2.impressum{
+	margin-top: 30px;
 	text-align: center;
-	font-size: 12pt;
-	border-color: black;
-	border: 1px;
-	right: 10px;
-	top: 15px;
-	padding: 5px;
-	-moz-border-radius: 15px;
-	-webkit-border-radius: 5px;
-	height: 30px;
-	width: 60px;
 
-    color: #dd404a;
-
-    text-decoration: none;
-}
-#login:hover{
-	background: #dd404a;
-	color: white;
-	cursor: pointer;
 }
 li a:hover {
     color: black;
+}
+div.footer{
+	position: absolute;
+	font-size: 12pt;
+	text-align: center;
+	width:100%;
+	bottom: 20px;
+}
+
+div.footer a:link{
+	color:black; background-color:transparent; text-decoration:none
+}
+div.footer a:visited{
+	color:black; background-color:transparent; text-decoration:none
 }
 #go {
 	margin-top: 50px;
