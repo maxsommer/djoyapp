@@ -5,6 +5,7 @@ var currentLocation = [];
 var currentMarkers = [];
 var currentMarkerLocation = {};
 var mapNewEvent;
+var mapDetails;
 
 // create WebAudio API context
 var context = new AudioContext();
@@ -29,7 +30,7 @@ var newEventSubmit;
 	*	12. Dezember 2015
 	*/
 
-	updateLocation(updateEvents);
+	updateLocation( updateEvents );
 
 	//	Echtzeitausführung
 	window.setInterval(function(){
@@ -60,6 +61,14 @@ var newEventSubmit;
 	*	Öffnen der Navigation
 	*/
 
+	$('#ajaxLoadedContentClose').click(function(){
+
+		$('#ajaxLoadedContentClose').hide( 150 );
+		$('#loadedContentBox').slideUp(300);
+		$('#eventDetails').slideUp(300);
+
+	});
+
 	navtoggle.addEventListener("click", function(){
 
 		if( nav.style.left === "-95vw" || nav.style.left === "" ){
@@ -75,40 +84,53 @@ var newEventSubmit;
 
 	actionButton.addEventListener( "click", function(){
 		playSound( "tap.mp3" );
-		$( "#ajaxLoadedContent" ).load( "/new", function(){
 
-			$( "#ajaxLoadedContent" ).slideDown( 300 );
-			initializeMap();
-
-			//	Event listener für abschicken des formulars
-			newEventSubmit = document.querySelector("#neweventsubmit");
-			newEventSubmit.addEventListener("click", function(){
-
-				var eventTitle 		= document.querySelector("input[name=title]").value;
-				var eventDescription 	= document.querySelector("textarea[name=description]").value;
-				var eventPrice 		= document.querySelector("input[name=price]").value;
-				var eventTime 		= document.querySelector("input[name=time]").value;
-				var eventLocation		= currentMarkerLocation;
-
-				$.post(
-					"/new/process",
-					{
-						title: eventTitle,
-						description: eventDescription,
-						price: eventPrice,
-						time: eventTime,
-						lat: eventLocation.lat,
-						lng: eventLocation.lng
-					},
-					function( data ){
-
-						$('#ajaxLoadedContent').html( data );
-
-					});
-
+		if( $('#loadedContentBox').is(":visible") ){
+			$('#ajaxLoadedContentClose').hide( 150 );
+			$('#loadedContentBox').slideUp( 300, function(){
+				$('#ajaxLoadedContent').html("");
 			});
+		}
+		else{
 
-		} );
+			$( "#ajaxLoadedContent" ).load( "/new", function(){
+
+				$('#ajaxLoadedContentClose').show( 150 );
+				$( "#loadedContentBox" ).slideDown( 300 );
+				initializeMap();
+
+				//	Event listener für abschicken des formulars
+				newEventSubmit = document.querySelector("#neweventsubmit");
+				newEventSubmit.addEventListener("click", function(){
+
+					var eventTitle 		= document.querySelector("input[name=title]").value;
+					var eventDescription 	= document.querySelector("textarea[name=description]").value;
+					var eventPrice 		= document.querySelector("input[name=price]").value;
+					var eventTime 		= document.querySelector("input[name=time]").value;
+					var eventLocation		= currentMarkerLocation;
+
+					$.post(
+						"/new/process",
+						{
+							title: eventTitle,
+							description: eventDescription,
+							price: eventPrice,
+							time: eventTime,
+							lat: eventLocation.lat,
+							lng: eventLocation.lng
+						},
+						function( data ){
+
+							$('#ajaxLoadedContent').html( data );
+
+						});
+
+				});
+
+			} );
+
+		}
+
 	});
 
 
@@ -164,23 +186,15 @@ function ajaxPost( datastring, url, callback ){
 
 }
 
-function updateLocation(){
+function updateLocation( callback ){
     	if (navigator.geolocation) {
 	  	navigator.geolocation.getCurrentPosition(function(position){
 			currentLocation.latitude = position.coords.latitude;
 			currentLocation.longitude = position.coords.longitude;
-		});
-    	} else {
-	  	meSymbolText.innerHTML = "Geolocation is not supported by this browser.";
-  	}
-}
 
-function updateLocation(callback){
-    	if (navigator.geolocation) {
-	  	navigator.geolocation.getCurrentPosition(function(position){
-			currentLocation.latitude = position.coords.latitude;
-			currentLocation.longitude = position.coords.longitude;
-			callback();
+			if( typeof callback === 'function' ){
+				callback();
+			}
 		});
     	} else {
 	  	meSymbolText.innerHTML = "Geolocation is not supported by this browser.";
@@ -222,7 +236,7 @@ function updateEvents(){
 								//var
 
 							//	 das Event wird auf dem Bildschirm hinzugefügt
-							eventContainer.innerHTML += "<a class=\"event\" href=\"/details/" + event.id + "\" style=\"left: "+ eventPositionScreenX +"%; bottom: "+ eventPositionScreenY +"%\"></a>";
+							eventContainer.innerHTML += "<a class=\"event\" onclick=\"javascript:openDetails("+ event.id +");\" style=\"left: "+ eventPositionScreenX +"%; bottom: "+ eventPositionScreenY +"%\"></a>";
 
 							//	statusmeldung
 							console.log("Event #"+event.id+" wurde zur Karte hinzugefügt.");
@@ -387,4 +401,29 @@ function setMapOnAll(map) {
 	  for (var i = 0; i < currentMarkers.length; i++) {
 	    	currentMarkers[i].setMap(map);
 	  }
+}
+
+
+function openDetails( id ){
+	$('#ajaxLoadedContent').load( "/details/" + id, function(){
+
+		$('#ajaxLoadedContentClose').show( 150 );
+		$('#eventDetails').slideDown(300);
+
+		$.get("/details/location/" + id, function(data){
+			locationDetails = JSON.parse( data );
+
+			mapDetails = new google.maps.Map(document.getElementById('mapDetails'), {
+			    center: {lat: locationDetails.lat, lng: locationDetails.lng},
+			    scrollwheel: false,
+			    zoom: 15
+			});
+			var myLatLng = new google.maps.LatLng(locationDetails.lat,locationDetails.lng);
+			var marker = new google.maps.Marker({
+		    		position: myLatLng,
+		    		map: mapDetails
+		  	});
+		});
+
+	} );
 }

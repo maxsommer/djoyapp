@@ -175,41 +175,6 @@ input[type="checkbox"]:checked + label + .dot {
 	transition: .25s;
 }
 
-#refreshButton{
-	display: block;
-	position: fixed;
-	cursor: pointer;
-	z-index: 101;
-
-	width: 60px;
-	height: 60px;
-	bottom: 20px;
-	right: 100px;
-
-	background-color: #54ca41;
-	border-radius: 100%;
-	box-shadow: 0px 2px 7px rgba(0,0,0,.25);
-
-	text-align: center;
-	color: #efefef;
-	font-weight: 700;
-	font-size: 3rem;
-	line-height: 56px;
-
-	transition: .25s;
-}
-#refreshButton:hover{
-	box-shadow: 0px 5px 15px rgba(0,0,0,.25);
-	transition: .25s;
-}
-#refreshButton:active{
-	background-color: #efefef;
-
-	color: #54ca41;
-
-	transition: .25s;
-}
-
 #meSymbol{
       display: block;
       position: absolute;
@@ -225,23 +190,6 @@ input[type="checkbox"]:checked + label + .dot {
       border-style: solid;
       border-width: 0 1rem 2rem 1rem;
       border-color: transparent transparent black transparent;
-}
-
-#meSymbolText{
-      display: block;
-      position: absolute;
-
-      width: 10rem;
-      height: 1rem;
-      left: 50%;
-      top: 50%;
-      margin-left: -5rem;
-      margin-top: 3rem;
-
-      background-color: transparent;
-      border-bottom: 1px solid rgba(0,0,0,.1);
-
-      text-align: center;
 }
 
 #eventContainer{
@@ -263,9 +211,10 @@ a.event{
 
       background-color: rgba(255, 0, 0, .8);
       border-radius: 100%;
+      cursor: pointer;
 }
 
-#ajaxLoadedContent{
+#loadedContentBox{
       display: none;
       position: absolute;
 
@@ -279,12 +228,11 @@ a.event{
 
       background-color: #efefef;
       border-radius: 2px;
-      box-shadow: 0px 0px 15px rgba( 0, 0, 0, .1);
 
       z-index: 999;
 }
 
-#ajaxLoadedContent input[type="text"], #ajaxLoadedContent input[type="number"], #ajaxLoadedContent input[type="time"]{
+#loadedContentBox input[type="text"], #ajaxLoadedContent input[type="number"], #ajaxLoadedContent input[type="time"]{
       width: 90%;
       left: 5%;
       padding: 0.5rem;
@@ -294,10 +242,10 @@ a.event{
       border: 0;
       border-radius: 2px;
 }
-#ajaxLoadedContent input[type="text"][name="title"]{
+#loadedContentBox input[type="text"][name="title"]{
 }
 
-#ajaxLoadedContent textarea{
+#loadedContentBox textarea{
       width: 90%;
       left: 5%;
       padding: 0.5rem;
@@ -308,6 +256,30 @@ a.event{
       border-radius: 2px;
       resize: none;
       overflow: hidden;
+}
+
+#loadedContentBox p.error{
+
+      background-color: #ee4d59;
+      padding: 1rem;
+      color: #efefef;
+}
+
+#ajaxLoadedContent{
+      display: block;
+}
+#ajaxLoadedContentClose{
+      display: none;
+      position: fixed;
+
+      width: 100vw;
+      height: 100vh;
+      left: 0px;
+      top: 0px;
+
+      background-color: rgba(0,0,0,.5);
+
+      z-index: 998;
 }
 
 #mapnewevent{
@@ -345,12 +317,39 @@ a.event{
       cursor: pointer;
 }
 
-#ajaxLoadedContent p.error{
+#eventDetails{
+      display: none;
+      position: absolute;
 
-      background-color: #ee4d59;
-      padding: 1rem;
-      color: #efefef;
+      width : 90vw;
+      height: auto;
+      left: 5vw;
+      top: 5vh;
 
+      background-color: #efefef;
+      color: #333;
+      border-radius: 2px;
+
+      z-index: 999;
+}
+#eventDetails h2{
+      padding-left: 1rem;
+      padding-right: 1rem
+
+      font-size: 2rem;
+      line-height: 2rem;
+      color: #333;
+}
+#eventDetails p{
+      padding-left: 1rem;
+      padding-right: 1rem;
+
+      font-size: 1rem;
+      line-height: 1.2rem;
+      color: #333;
+}
+#mapDetails{
+      height: 20rem;
 }
 
 

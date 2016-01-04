@@ -22,11 +22,16 @@ OSX: Open the terminal and navigate to the folder you saved the project in and r
 * Login Site
 
 ####Version 0.15:
-* Details
 * Media
 * Share
 
 ##Done:
+####Version 0.151:
+* CSS fixes
+* Details page for events is now available
+* Initial loading time for events should be better now
+* Animations for transitions
+
 ####Version 0.150:
 * Client auto-updates event radar every 10 seconds
 * Client auto-updates location every minute
