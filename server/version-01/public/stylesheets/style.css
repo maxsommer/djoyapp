@@ -332,14 +332,6 @@ a.event{
 
       z-index: 999;
 }
-#eventDetails h2{
-      padding-left: 1rem;
-      padding-right: 1rem
-
-      font-size: 2rem;
-      line-height: 2rem;
-      color: #333;
-}
 #eventDetails p{
       padding-left: 1rem;
       padding-right: 1rem;
@@ -350,6 +342,21 @@ a.event{
 }
 #mapDetails{
       height: 20rem;
+      margin-bottom: 1rem;
+}
+#eventDetailsHeaderImage{
+      width: 100%;
+      max-height: 400px;
+      border-top-left-radius: 2px;
+      border-top-right-radius: 2px;
+}
+#eventDetails h2{
+      position: absolute;
+      margin-top: -5rem;
+      padding-left: 2rem;
+      font-size: 2rem;
+      line-height: 2rem;
+      color: #efefef;
 }
 
 

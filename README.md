@@ -22,10 +22,14 @@ OSX: Open the terminal and navigate to the folder you saved the project in and r
 * Login Site
 
 ####Version 0.15:
-* Media
 * Share
 
 ##Done:
+####Version 0.152:
+* Fixed UI Bugs
+* Additional texts for Details page
+* Media for Events
+
 ####Version 0.151:
 * CSS fixes
 * Details page for events is now available
@@ -64,7 +68,6 @@ OSX: Open the terminal and navigate to the folder you saved the project in and r
 * HTML / CSS / JS Base from interface tests
 
 ##Known Bugs:  
-* Add Event: When adding a new event and submitting while not having entered every field (apart from price) an error appears above the form. The map inside the form does not reload.
 
 ##Thanks to all contributors and folks out there helping these projects we use:
 
@@ -81,4 +84,8 @@ http://momentjs.com/
 Octave
 https://github.com/scopegate/octave/   
 SQLite3
-https://github.com/mapbox/node-sqlite3/wiki/API
+https://github.com/mapbox/node-sqlite3/wiki/API  
+Multer
+https://github.com/expressjs/multer  
+lwip
+https://github.com/EyalAr/lwip

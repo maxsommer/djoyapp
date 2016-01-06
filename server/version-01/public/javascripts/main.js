@@ -100,31 +100,34 @@ var newEventSubmit;
 				$( "#loadedContentBox" ).slideDown( 300 );
 				initializeMap();
 
-				//	Event listener für abschicken des formulars
-				newEventSubmit = document.querySelector("#neweventsubmit");
-				newEventSubmit.addEventListener("click", function(){
+				$('#newEventForm').submit(function(){
 
-					var eventTitle 		= document.querySelector("input[name=title]").value;
-					var eventDescription 	= document.querySelector("textarea[name=description]").value;
-					var eventPrice 		= document.querySelector("input[name=price]").value;
-					var eventTime 		= document.querySelector("input[name=time]").value;
-					var eventLocation		= currentMarkerLocation;
+					$(this).ajaxSubmit({
 
-					$.post(
-						"/new/process",
-						{
-							title: eventTitle,
-							description: eventDescription,
-							price: eventPrice,
-							time: eventTime,
-							lat: eventLocation.lat,
-							lng: eventLocation.lng
+						error: function(xhr) {
+
 						},
-						function( data ){
 
-							$('#ajaxLoadedContent').html( data );
+						success: function(response) {
+							//TODO: We will fill this in later
+							if( response === '' ){
+								$('#ajaxLoadedContentClose').hide( 150 );
+								$( "#loadedContentBox" ).slideUp( 300 );
+								$( "#loadedContentBox" ).html( "" );
+								updateEvents();
+							}
+							else{
+								$('#ajaxLoadedContent').html(response, function(){
+									$('#ajaxLoadedContent').slideDown(300, function(){
+									});
+								});
+								$('#loadedContentBox').show();
+								initializeMap();
+							}
+						}
+					});
 
-						});
+					return false;
 
 				});
 
@@ -217,7 +220,7 @@ function updateEvents(){
 				events = JSON.parse( events );
 
 				if( events.length === 0 ){
-					console.log("Leider gibt es aktuell keine neuen Events in deiner Nähe.");
+					//console.log("Leider gibt es aktuell keine neuen Events in deiner Nähe.");
 				}
 				else{
 					var addedEventCounter = 0;
@@ -349,7 +352,7 @@ function checkEvents(){
 			currentEvents.splice(i, 1);
 
 			//	event aus der darstellung herausnehmen
-			var element = document.querySelector("a.event[href='/details/"+ anzeige +"']");
+			var element = document.querySelector("a[class='event'][onclick='javascript:openDetails("+ anzeige +");']");
 			eventContainer.removeChild( element );
 
 			//	Statusanzeige
@@ -415,6 +418,8 @@ function placeMarkerAndPanTo(latLng, map) {
   	});
 	currentMarkerLocation.lat = marker.getPosition().lat();
 	currentMarkerLocation.lng = marker.getPosition().lng();
+	document.querySelector("input[name=lat]").value = currentMarkerLocation.lat;
+	document.querySelector("input[name=lng]").value = currentMarkerLocation.lng;
   	currentMarkers.push( marker );
   	map.panTo( latLng );
 }
@@ -434,16 +439,22 @@ function openDetails( id ){
 		$.get("/details/location/" + id, function(data){
 			locationDetails = JSON.parse( data );
 
-			mapDetails = new google.maps.Map(document.getElementById('mapDetails'), {
-			    center: {lat: locationDetails.lat, lng: locationDetails.lng},
-			    scrollwheel: false,
-			    zoom: 15
-			});
-			var myLatLng = new google.maps.LatLng(locationDetails.lat,locationDetails.lng);
-			var marker = new google.maps.Marker({
-		    		position: myLatLng,
-		    		map: mapDetails
-		  	});
+			if( locationDetails.lat != 0 || locationDetails.lng != 0 ){
+				mapDetails = new google.maps.Map(document.getElementById('mapDetails'), {
+				    center: {lat: locationDetails.lat, lng: locationDetails.lng},
+				    scrollwheel: false,
+				    zoom: 15
+				});
+				var myLatLng = new google.maps.LatLng(locationDetails.lat,locationDetails.lng);
+				var marker = new google.maps.Marker({
+			    		position: myLatLng,
+			    		map: mapDetails
+			  	});
+			}else{
+				var element = document.querySelector("a[class='event'][onclick='javascript:openDetails("+id+");']");
+				eventContainer.removeChild( element );
+				console.log("Event #" + id + " ist nicht mehr aktuell und wurde von der Karte entfernt.");
+			}
 		});
 
 	} );

@@ -4,14 +4,16 @@
 <p class="error">{{error}}</p>
 {{/if}}
 
-<form id="newEventForm">
+<form id="newEventForm" enctype="multipart/form-data" action="/new/process" method="post">
 	<input type="text" name="title" value="" placeholder="Titel" required></input>
 	<textarea name="description" required maxlength="300" placeholder="Beschreibung"></textarea>
 	<input type="number" min="0" max="100" name="price" value="" placeholder="Preis in €"></input>
 	<input type="time" name="time" required></input>
-	<div id="mapnewevent"></div>
-	<p>Hier fehlt noch ein Bilder upload.</p>
-	<div id="neweventsubmit">Event erstellen</div>
+	<div id="mapnewevent"></div><br>
+	<input type="hidden" name="lat" value="">
+	<input type="hidden" name="lng" value="">
+	<input type="file" name="image" accept="image/*">
+	<input id="neweventsubmit" type="submit" value="Event erstellen">
 </form>
 
 </div>
