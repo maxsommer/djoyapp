@@ -473,7 +473,28 @@ a.event{
 	.dot{line-height: 16px;}
 
       nav{
+            display: block;
             width: 30vw;
+            left: 0px;
+            min-width: 300px;
+      }
+
+      #navtoggle{
+            display: none;
+      }
+
+      main{
+            position: absolute;
+            display: block;
+            left: 30vw;
+            top: 0px;
+            width: 70vw;
+            height: 100vh;
+      }
+
+      #eventContainer{
+            top: 0px;
+            width: 70vw;
       }
 
 }
@@ -482,6 +503,13 @@ a.event{
 
 @media only screen and (min-width: 64rem){
 
+      nav{
+            width: 25vw;
+      }
 
+      main{
+            left: 25vw;
+            width: 75vw;
+      }
 
 }
