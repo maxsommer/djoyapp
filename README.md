@@ -4,7 +4,7 @@ Igor Filipe, Isabella Roscher, Max Sommer, Olga Zimmermann
 Djoya is going to be an app that helps you find out what to do here and right now.
 
 ##Installation:
-Before trying to run the server please execute the following command in the directory of the server:
+Before trying to run the server please execute the following command in the directory of the server:  
 ``` npm install lwip --save ```
 
 ##How to run the server:  
