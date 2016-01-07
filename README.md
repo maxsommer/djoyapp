@@ -3,6 +3,10 @@ P3 course of IMD winter term 2015 / 2016.
 Igor Filipe, Isabella Roscher, Max Sommer, Olga Zimmermann  
 Djoya is going to be an app that helps you find out what to do here and right now.
 
+##Installation:
+Before trying to run the server please execute the following command in the directory of the server:
+``` npm install lwip --save ```
+
 ##How to run the server:  
 OSX: Open the terminal and navigate to the folder you saved the project in and run the following command:   
 ``` DEBUG=version-01:* npm start ```  
@@ -25,6 +29,10 @@ OSX: Open the terminal and navigate to the folder you saved the project in and r
 * Share
 
 ##Done:
+####Version 0.153:
+* Fixes
+* UI Tweaks
+
 ####Version 0.152:
 * Fixed UI Bugs
 * Additional texts for Details page
