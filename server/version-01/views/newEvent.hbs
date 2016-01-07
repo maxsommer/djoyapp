@@ -8,15 +8,15 @@
 <a id="loadedContentBoxCloseButton" onclick="javascript:closeLoadedContentBox();">x</a>
 
 <form id="newEventForm" enctype="multipart/form-data" action="/new/process" method="post">
-	<label for="title"><i class="fa fa-info fa-fw"></i>&nbsp;Titel:</label>
+	<label for="title"><i class="fa fa-info fa-fw"></i>&nbsp;Titel:</label><br>
 	<input autocomplete="off" type="text" name="title" value="" placeholder="Titel" required></input><br><br>
-	<label for="title"><i class="fa fa-question fa-fw"></i>&nbsp;Beschreibung:</label>
+	<label for="title"><i class="fa fa-question fa-fw"></i>&nbsp;Beschreibung:</label><br>
 	<textarea autocomplete="off" name="description" required maxlength="300" placeholder="Beschreibung"></textarea><br><br>
-	<label for="title"><i class="fa fa-credit-card fa-fw"></i>&nbsp;Preis:</label>
+	<label for="title"><i class="fa fa-credit-card fa-fw"></i>&nbsp;Preis:</label><br>
 	<input autocomplete="off" type="number" min="0" max="100" name="price" value="" placeholder="Preis in €"></input><br><br>
-	<label for="title"><i class="fa fa-clock-o fa-fw"></i>&nbsp;Zeit:</label>
+	<label for="title"><i class="fa fa-clock-o fa-fw"></i>&nbsp;Zeit:</label><br>
 	<input autocomplete="off" type="time" value="{{currentTime}}" name="time" required></input><br><br>
-	<label for="mapnewevent"><i class="fa fa-map-marker fa-fw"></i>&nbsp;Ort:</label>
+	<label for="mapnewevent"><i class="fa fa-map-marker fa-fw"></i>&nbsp;Ort:</label><br>
 	<div id="mapnewevent"></div><br><br>
 	<input type="hidden" name="lat" value="">
 	<input type="hidden" name="lng" value="">
