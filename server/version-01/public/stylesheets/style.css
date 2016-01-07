@@ -468,7 +468,7 @@ a.event{
 }
 
 
-@media only screen and (min-width: 40rem){
+@media only screen and (min-width: 769px){
 
 	.dot{line-height: 16px;}
 
