@@ -10,7 +10,7 @@ var router = express.Router();
 var upload = multer({ dest: 'public/uploads/' });
 
 router.get('/', function(req, res, next) {
-  res.render('newEvent', { layout:false });
+  res.render('newEvent', { layout:false, currentTime: moment().format("HH:mm") });
 });
 
 router.post('/process', upload.single('image') ,function(req, res, next) {
@@ -35,7 +35,7 @@ router.post('/process', upload.single('image') ,function(req, res, next) {
             eventImage === '' || eventImage === 'undefined' || typeof eventImage === 'undefined'
 	){
 
-		res.render('newEvent', { layout:false, error: "Du musst das Formular vollständig ausfüllen :)" });
+		res.render('newEvent', { layout:false, error: "Du musst das Formular vollständig ausfüllen :)"  });
 
 	}
 	else{

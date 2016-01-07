@@ -96,6 +96,7 @@ var newEventSubmit;
 
 			$( "#ajaxLoadedContent" ).load( "/new", function(){
 
+				$('#ajaxLoadedContent').show( 150 );
 				$('#ajaxLoadedContentClose').show( 150 );
 				$( "#loadedContentBox" ).slideDown( 300 );
 				initializeMap();
@@ -433,6 +434,7 @@ function setMapOnAll(map) {
 function openDetails( id ){
 	$('#ajaxLoadedContent').load( "/details/" + id, function(){
 
+		$('#ajaxLoadedContent').slideDown(150);
 		$('#ajaxLoadedContentClose').show( 150 );
 		$('#eventDetails').slideDown(300);
 
@@ -458,4 +460,10 @@ function openDetails( id ){
 		});
 
 	} );
+}
+
+function closeLoadedContentBox(){
+	$('#ajaxLoadedContent').slideUp(150);
+	$('#ajaxLoadedContentClose').slideUp(150);
+	$('#ajaxLoadedContent').html("");
 }
