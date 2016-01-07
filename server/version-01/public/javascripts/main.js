@@ -185,7 +185,7 @@ function ajaxPost( datastring, url, callback ){
 
 	}
 
-	xhttp.open("POST", "http://localhost:3000/radar", true);
+	xhttp.open("POST", "/radar", true);
 	xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 	xhttp.send( datastring );
 
@@ -215,7 +215,7 @@ function updateEvents(){
 
 	ajaxPost(
 			"latitude=" + currentLocation.latitude + "&longitude=" + currentLocation.longitude + "",
-			"http://localhost:3000/radar",
+			"/radar",
 			function( events ){
 
 				events = JSON.parse( events );
