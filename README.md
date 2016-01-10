@@ -27,10 +27,10 @@ OSX: Open the terminal and navigate to the folder you saved the project in and r
 
 ##Done:
 ###Version 0.2:
-* Login
+* Login (and respective subpages)
 * Authentication via passport-local
-* Registration
-* Logout
+* Registration (and respectives subpages)
+* Logout (and respective subpages)
 
 ####Version 0.153:
 * Fixes
