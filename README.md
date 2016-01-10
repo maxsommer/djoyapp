@@ -25,13 +25,17 @@ OSX: Open the terminal and navigate to the folder you saved the project in and r
 * Register Site
 * Login Site
 
-####Version 0.15:
-* Share
-
 ##Done:
+###Version 0.2:
+* Login
+* Authentication via passport-local
+* Registration
+* Logout
+
 ####Version 0.153:
 * Fixes
 * UI Tweaks
+* ~~Share~~
 
 ####Version 0.152:
 * Fixed UI Bugs

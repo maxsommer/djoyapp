@@ -63,8 +63,7 @@ router.post('/', function(req, res, next) {
 });
 
 router.get('/', function(req, res, next) {
-  //res.send( req.body.data );
-  res.send("404 <3!");
+	res.render('radar', { title: 'Djoya' });
 });
 
 

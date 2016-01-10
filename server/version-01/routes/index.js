@@ -17,7 +17,16 @@ var router = express.Router();
 */
 
 router.get('/', function(req, res, next) {
-  res.render('radar', { title: 'Djoya' });
+      if( req.user ){
+            //    Der Nutzer ist eingeloggt, also soll, je nachdem ob er schon
+            //    eine Einführung bekommen hat, die Einführung oder das Radar
+            //    gezeigt werden :)
+
+            res.render('radar', { title: 'Djoya' });
+      }
+      else{
+            res.redirect('/welcome');
+      }
 });
 
 module.exports = router;
