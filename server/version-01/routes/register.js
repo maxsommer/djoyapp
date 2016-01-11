@@ -11,7 +11,7 @@ router.get('/', function(req, res, next) {
 
 router.post('/', function(req, res, next){
 
-	if( req.body.username != 'undefined' || req.body.password != 'undefined' ){
+	if( (req.body.username != 'undefined' || req.body.password != 'undefined') && req.body.password === req.body.password2 ){
 
             var username = req.body.username;
 
@@ -44,6 +44,9 @@ router.post('/', function(req, res, next){
 
 
 	}
+      else if( req.body.password != req.body.password2 ){
+            res.render('welcome', {title: "Djoya", registererror: "Die beiden Passwortfelder müssen übereinstimmen."});
+      }
 	else{
 
 		res.render('register-error', {title: "Djoya", error: 'Bitte fülle alle Formularfelder aus :)'});

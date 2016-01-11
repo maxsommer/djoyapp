@@ -87,7 +87,10 @@ app.get('/login', function(req, res, next) {
 });
 
 app.post('/login', passport.authenticate('local', { successRedirect: '/radar',
-                                                    failureRedirect: '/' }));
+                                                    failureRedirect: '/login-fail' }));
+app.get('/login-fail', function(req,res,next){
+      res.render('login-fail', {title: "Djoya"});
+} )
 
 app.get('/logout', function(req, res){
       req.logout();

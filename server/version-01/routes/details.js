@@ -54,7 +54,7 @@ router.get('/:int(\\d+)', function(req, res, next) {
 
 	}
 	else{
-		res.redirect('login');
+		res.redirect('welcome');
 	}
 
 });
@@ -101,7 +101,7 @@ router.get('/location/:int(\\d+)', function(req, res, next) {
 
 	}
 	else{
-		res.redirect('login');
+		res.redirect('welcome');
 	}
 
 });

@@ -65,7 +65,7 @@ router.post('/', function(req, res, next) {
 
 	}
 	else{
-		res.redirect('login');
+		res.redirect('welcome');
 	}
 
 
@@ -77,7 +77,7 @@ router.get('/', function(req, res, next) {
 		res.render('radar', { title: 'Djoya' });
 	}
 	else{
-		res.redirect('login');
+		res.redirect('welcome');
 	}
 });
 

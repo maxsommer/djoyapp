@@ -7,41 +7,21 @@
 <div id="registrationContainer">
 	<div class="container">
 
-		{{#if infotext}}
-		<p class="info"><i class="fa fa-info-circle fa-fw"></i>{{infotext}}</p>
-		{{/if}}
-
 	<div class="row clearfix">
 		<div class="column half loginRegisterBox">
 		<h2>Du möchtest dich anmelden?</h2>
-		{{#if loginerror}}
-		<p class="error"><i class="fa fa-exclamation-circle fa-fw"></i>{{loginerror}}</p>
-		{{/if}}
-		{{#if registersuccess}}
-		<p class="success"><i class="fa fa-check fa-fw"></i>{{registersuccess}}</p>
-		{{/if}}
+		<p class="error"><i class="fa fa-exclamation-circle fa-fw"></i>Überprüfe bitte noch einmal ob du deine Anmeldedaten richtig eingegeben hast.</p>
 			<form action="/login" method="POST">
-				<input type="text" name="username" maxlength="20" placeholder="Benutzername" required autocomplete="off"
-				{{#if loginerror}}
-					autofocus
-				{{/if}}
-				{{#if registersuccess}}
-					autofocus
-				{{/if}}><br>
+				<input type="text" name="username" maxlength="20" placeholder="Benutzername" required autocomplete="off" autofocus<br>
 				<input type="password" name="password" placeholder="Passwort" required autocomplete="off"><br>
 				<input type="submit" value="Anmelden"><br>
 			</form>
 		</div>
 	<div class="column half loginRegisterBox">
 		<h2>Du hast noch keinen Account?</h2>
-		{{#if registererror}}
-		<p class="error"><i class="fa fa-exclamation-circle fa-fw"></i>{{registererror}}</p>
-		{{/if}}
+
 			<form action="/register" method="POST">
-				<input type="text" name="username" maxlength="20" placeholder="Benutzername" required autocomplete="off"
-				{{#if registererror}}
-					autofocus
-				{{/if}}><br>
+				<input type="text" name="username" maxlength="20" placeholder="Benutzername" required autocomplete="off"<br>
 				<input type="password" name="password" placeholder="Passwort (mindestens 7 Zeichen)" pattern=".{7,}" required autocomplete="off"><br>
 				<input type="password" name="password2" placeholder="Wiederholung des Passwortes" pattern=".{7,}" required autocomplete="off"><br>
 				<input type="checkbox" name="privacyEnabled" value="true">Ich möchte die Privatsphäreoptionen aktivieren (*)<br>

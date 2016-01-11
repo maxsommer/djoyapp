@@ -14,13 +14,14 @@ router.get('/', function(req, res, next) {
             res.render('newEvent', { layout:false, currentTime: moment().format("HH:mm") });
       }
       else{
-            res.redirect('login');
+            res.redirect('welcome');
       }
 });
 
 router.post('/process', upload.single('image') ,function(req, res, next) {
 
       if( req.user ){
+
 
             var eventTitle 		= req.body.title;
             var eventDescription 	= req.body.description;
@@ -29,6 +30,7 @@ router.post('/process', upload.single('image') ,function(req, res, next) {
             var eventLocationLat 	= req.body.lat;
             var eventLocationLng 	= req.body.lng;
             var eventImage          = req.file;
+            var authorId            = req.user.id;
 
             var time = moment().format('MM/DD/YYYY');
             time += " " + eventTime;
@@ -59,7 +61,7 @@ router.post('/process', upload.single('image') ,function(req, res, next) {
 
                               var fileNameFull;
 
-                              db.run("INSERT INTO events ( name, description, price, time, locationLatitude, locationLongitude, authorId ) VALUES ( ?, ?, ?, ?, ?, ?, 0 )", [ eventTitle, eventDescription, eventPrice, eventTime, eventLocationLat, eventLocationLng ], function(err){
+                              db.run("INSERT INTO events ( name, description, price, time, locationLatitude, locationLongitude, authorId ) VALUES ( ?, ?, ?, ?, ?, ?, ? )", [ eventTitle, eventDescription, eventPrice, eventTime, eventLocationLat, eventLocationLng, authorId ], function(err){
                                     if (err) {
                                           console.log("Error: \n");
                                           console.log( err.message + "\n " + err );
@@ -108,7 +110,7 @@ router.post('/process', upload.single('image') ,function(req, res, next) {
 
       }
       else{
-            res.redirect('login');
+            res.redirect('welcome');
       }
 
 
