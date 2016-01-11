@@ -1,6 +1,10 @@
+@import url(https://fonts.googleapis.com/css?family=Lato);
+@font-face {
+font-family: MissionScript;
+src: url("./Mission-Script.otf") format("opentype");
+}
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font-family: Lato, "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
 a {
@@ -56,7 +60,7 @@ nav{
 }
 
 nav h2{
-	text-align: center;
+	text-align: left;
 	font-size: 1.5rem;
 	line-height: 1.8rem;
 	color: #efefef;
@@ -94,10 +98,10 @@ nav h2{
 	line-height: 18px;
 }
 
-input[type="checkbox"]{
+nav input[type="checkbox"]{
 	display: none;
 }
-input[type="checkbox"] + label span {
+nav input[type="checkbox"] + label span {
     display:inline-block;
     position: relative;
     width: 65px;
@@ -111,12 +115,12 @@ input[type="checkbox"] + label span {
 
     transition: 0.15s;
 }
-input[type="checkbox"]:checked + label span {
+nav input[type="checkbox"]:checked + label span {
     background-color: #efefef;
 
     transition: 0.15s;
 }
-input[type="checkbox"] + label + .dot {
+nav input[type="checkbox"] + label + .dot {
     display:inline-block;
     position: relative;
     width: 28px;
@@ -132,7 +136,7 @@ input[type="checkbox"] + label + .dot {
 
     transition: 0.15s;
 }
-input[type="checkbox"]:checked + label + .dot {
+nav input[type="checkbox"]:checked + label + .dot {
     left: -36px;
 
     background-color: #555;
@@ -467,6 +471,135 @@ a.event{
       overflow: hidden;
 }
 
+#welcomeContainer, #welcomeContainerFilter, #welcomeContainerText{
+      position: absolute;
+      display: block;
+
+      width: 100%;
+      height: 30rem;
+      left: 0;
+      top: 0;
+      padding: 0;
+      margin: 0
+}
+#welcomeContainer{
+      background-image: url('../images/djoya-background.jpeg');
+      background-size: cover;;
+      background-repeat: no-repeat;
+      background-position: center;
+      z-index: 10;
+}
+#welcomeContainerFilter{
+      background-color: rgba(238, 77, 89, .15);
+      z-index: 11;
+}
+#welcomeContainerText{
+      padding-left: 1rem;
+      z-index: 12;
+}
+#welcomeContainerText #logo{
+      display: block;
+      position: relative;
+      margin-top: 2rem;
+      margin-bottom: 2rem;
+}
+#welcomeContainerText h1#logo a, nav a#logo{
+      font-family: MissionScript;
+      font-size: 4rem;
+      font-weight: 200;
+      color: #efefef;
+      text-transform: none;
+      text-shadow: 0px 0px 15px rgba(0,0,0,.2);
+      text-decoration: none;
+      transition: .25s;
+}
+#welcomeContainerText h1#logo a:hover{
+      text-shadow: 0px 0px 40px rgba(255,255,255,.2);
+      color: rgba(238, 77, 89, 1);
+      transition: .25s;
+}
+#welcomeContainerText h2{
+      color: #efefef;
+      text-transform: uppercase;
+      text-shadow: 0px 0px 15px rgba(0,0,0,.15);
+      font-size: 1.75rem;
+      line-height: 2rem;
+}
+#registrationContainer{
+      position: absolute;
+      display: block;
+
+      width: 100%;
+      top: 30rem;
+      padding: 1rem;
+}
+#registrationContainer h2{
+      margin-top: 0;
+}
+#registrationContainer input[type='text'], #registrationContainer input[type='password']{
+      width: 100%;
+      height: 3rem;
+      padding: 1rem;
+      margin-bottom: .5rem;
+      border: 1px solid #ccc;
+      background-color: #fff;
+      border-radius: 1px;
+      outline: 0 none;
+      transition: .25s;
+}
+#registrationContainer input[type='text']:focus, #registrationContainer input[type='password']:focus{
+      border: 1px solid #ccc;
+      background-color: #ccc;
+      transition: .25s;
+      color: #fff;
+}
+#registrationContainer input[type='text']:focus::-webkit-input-placeholder, #registrationContainer input[type='password']:focus::-webkit-input-placeholder{
+      color: #fff;
+}
+#registrationContainer input[type='submit']{
+      display: inline-block;
+      position: relative;
+
+      width: auto;
+      height: 3rem;
+      padding-left: 1rem;
+      padding-right: 1rem;
+      margin: 0;
+
+      background-color: #ee4d59;
+      border: 1px solid #ee4d59;
+      border-radius: 2px;
+
+      color: #efefef;
+      line-height: 2.5rem;
+      font-size: 1.25rem;
+      font-weight: 600;
+}
+
+.loginRegisterBox{
+      margin-bottom: 2rem;
+}
+
+.success{
+            padding: 1rem;
+            color: #54CA41;
+            border: 1px solid #54CA41;
+            border-radius: 2px;
+}
+
+.error{
+      padding: 1rem;
+      color: #ee4d59;
+      border: 1px solid #ee4d59;
+      border-radius: 2px;
+}
+
+.info{
+      padding: 1rem;
+      color: #38779C;
+      border: 1px solid #38779C;
+      border-radius: 2px;
+}
 
 @media only screen and (min-width: 769px){
 
@@ -490,6 +623,10 @@ a.event{
             top: 0px;
             width: 70vw;
             height: 100vh;
+      }
+      main.nonav{
+            left: 0vw;
+            width: 100vw;
       }
 
       #eventContainer{

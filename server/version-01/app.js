@@ -37,6 +37,12 @@ app.use(require('express-session')({ secret: 'endjoyaselves', resave: false, sav
 app.use(passport.initialize());
 app.use(passport.session());
 
+//    Make login variable available in all templates
+app.use( function(req, res, next){
+      app.locals.login = req.user;
+      next();
+} );
+
 app.use('/', routes);
 app.use('/radar', radar);
 app.use('/new', newEvent);
@@ -80,12 +86,12 @@ app.get('/login', function(req, res, next) {
   res.render('login-form', { title: 'Djoya' });
 });
 
-app.post('/login', passport.authenticate('local', { successRedirect: '/good-login',
-                                                    failureRedirect: '/bad-login' }));
+app.post('/login', passport.authenticate('local', { successRedirect: '/radar',
+                                                    failureRedirect: '/' }));
 
 app.get('/logout', function(req, res){
       req.logout();
-      res.render('logout');
+      res.redirect('welcome');
 });
 
 // catch 404 and forward to error handler

@@ -22,7 +22,7 @@ router.get('/', function(req, res, next) {
             //    eine Einführung bekommen hat, die Einführung oder das Radar
             //    gezeigt werden :)
 
-            res.render('radar', { title: 'Djoya' });
+            res.redirect('radar');
       }
       else{
             res.redirect('/welcome');

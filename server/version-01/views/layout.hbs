@@ -13,18 +13,21 @@
       <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   </head>
   <body>
+        {{#if login}}
         <nav>
+
+             <a id="logo" href="/">Djoya</a>
 
              <h2>Menu</h2>
 
              <div class="navsetting">
-                   <a href="/"><i class="fa fa-compass fa-fw"></i>&nbsp; Radar</a>
+                   <a href="/radar"><i class="fa fa-compass fa-fw"></i>&nbsp; Radar</a>
              </div>
              <div class="navsetting">
-                   <a href="/"><i class="fa fa-info-circle fa-fw"></i>&nbsp; Guide</a></a>
+                   <a href="/guide"><i class="fa fa-info-circle fa-fw"></i>&nbsp; Guide</a></a>
              </div>
              <div class="navsetting">
-                   <a href="/"><i class="fa fa-sign-out fa-fw"></i>&nbsp; Logout</a></a>
+                   <a href="/logout"><i class="fa fa-sign-out fa-fw"></i>&nbsp; Logout</a></a>
              </div>
 
              <h2>Settings</h2>
@@ -50,16 +53,19 @@
              </div>
 
 
-        </nav>
+       </nav>
 
         <div id="navtoggle"><i class="fa fa-navicon fa-fw"></i>&nbsp;menu</a></div>
+        {{/if}}
 
         <div id="ajaxLoadedContentClose"></div>
         <div id="ajaxLoadedContent"></div>
 
-        <main>
+        <main {{#unless login}}class="nonav"{{/unless}}>
               {{{body}}}
+              {{#if login}}
               <div id="actionButton">+</div>
+              {{/if}}
         </main>
 
         <script src="https://code.jquery.com/jquery-2.1.4.min.js" type="text/javascript"></script>

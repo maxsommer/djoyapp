@@ -21,11 +21,17 @@ OSX: Open the terminal and navigate to the folder you saved the project in and r
 * Account Settings
 
 ###Version ~0.2:
-* Login System
-* Register Site
-* Login Site
+* Create new event: write user-id in db
+* Registration rules (minimal password length etc.)
 
 ##Done:
+####Version 0.21:
+* Added Fonts (Lato & Mission Script[for now the free version since we're not commercial])
+* Login restrictions
+* Welcome Page
+* Fill subpages with content
+* Link all pages to each other to create a flow
+
 ###Version 0.2:
 * Login (and respective subpages)
 * Authentication via passport-local
@@ -100,4 +106,10 @@ https://github.com/mapbox/node-sqlite3/wiki/API
 Multer
 https://github.com/expressjs/multer  
 lwip
-https://github.com/EyalAr/lwip
+https://github.com/EyalAr/lwip  
+passport.js
+http://passportjs.org/  
+passport-local
+https://github.com/jaredhanson/passport-local  
+Kimson Doan (Djoya welcome screen background image)
+https://unsplash.com/yaykimmyd  

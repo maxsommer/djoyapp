@@ -31,36 +31,43 @@ var newEventSubmit;
 	*	12. Dezember 2015
 	*/
 
-	updateLocation( updateEvents );
 
-	//	Echtzeitausführung
-	window.setInterval(function(){
+	var currentURL = window.location.href;
+	var currentURL = currentURL.split("/");
+	var currentPage = currentURL[ currentURL.length-1 ];
 
-		//	lokale Zeit aktualisieren
-		currentTime = moment().unix();
-
-
-		//	gibt es Events, die nicht mehr auf dem Bildschirm angezeigt
-		//	werden sollten weil sie schon nicht mehr aktuell sind?
-		checkEvents();
-
-		//	neue events laden
-		updateEvents();
-
-	}, 10000);
-
-	//	Echtzeitausführung
-	window.setInterval(function(){
-
-		//	ort aktualisieren
-		updateLocation();
-
-	}, 60000);
+	if( currentPage === 'radar')
+		updateLocation( updateEvents );
 
 
-	/*
-	*	Öffnen der Navigation
-	*/
+	if( currentPage === 'radar' ){
+
+		//	Echtzeitausführung
+		window.setInterval(function(){
+
+			//	lokale Zeit aktualisieren
+			currentTime = moment().unix();
+
+
+			//	gibt es Events, die nicht mehr auf dem Bildschirm angezeigt
+			//	werden sollten weil sie schon nicht mehr aktuell sind?
+			checkEvents();
+
+			//	neue events laden
+			updateEvents();
+
+		}, 10000);
+
+		//	Echtzeitausführung
+		window.setInterval(function(){
+
+			//	ort aktualisieren
+			updateLocation();
+
+		}, 60000);
+
+	}
+
 
 	$('#ajaxLoadedContentClose').click(function(){
 
@@ -70,88 +77,96 @@ var newEventSubmit;
 
 	});
 
-	navtoggle.addEventListener("click", function(){
+	if( currentPage === 'radar' ) {
 
-		if( nav.style.left === "-95vw" || nav.style.left === "" ){
-			nav.style.left = "0px";
-			navtoggle.style.left = "80vw";
-		}
-		else{
-			nav.style.left = "-95vw";
-			navtoggle.style.left = "0px";
-		}
+		/*
+		*	Öffnen der Navigation
+		*/
+		navtoggle.addEventListener("click", function(){
 
-	});
-
-	actionButton.addEventListener( "click", function(){
-		playSound( "tap.mp3" );
-
-		if( $('#loadedContentBox').is(":visible") ){
-			$('#ajaxLoadedContentClose').hide( 150 );
-			$('#loadedContentBox').slideUp( 300, function(){
-				$('#ajaxLoadedContent').html("");
-			});
-		}
-		else{
-
-			$( "#ajaxLoadedContent" ).load( "/new", function(){
-
-				$('#ajaxLoadedContent').show( 150 );
-				$('#ajaxLoadedContentClose').show( 150 );
-				$( "#loadedContentBox" ).slideDown( 300 );
-				initializeMap();
-
-				$('#newEventForm').submit(function(){
-
-					$(this).ajaxSubmit({
-
-						error: function(xhr) {
-
-						},
-
-						success: function(response) {
-							//TODO: We will fill this in later
-							if( response === '' ){
-								$('#ajaxLoadedContentClose').hide( 150 );
-								$( "#loadedContentBox" ).slideUp( 300 );
-								$( "#loadedContentBox" ).html( "" );
-								updateEvents();
-							}
-							else{
-								$('#ajaxLoadedContent').html(response, function(){
-									$('#ajaxLoadedContent').slideDown(300, function(){
-									});
-								});
-								$('#loadedContentBox').show();
-								initializeMap();
-							}
-						}
-					});
-
-					return false;
-
-				});
-
-			} );
-
-		}
-
-	});
-
-
-	/*
-	*	Checkboxen
-	*/
-
-	for(i = 0; i < dot.length; i++){
-		dot[i].addEventListener( "click", function(){
-			for(j = 0; j < dot.length; j++){
-				if( Object.is( this, dot[j] ) ){
-					checkbox[j].checked = !checkbox[j].checked;
-				}
+			if( nav.style.left === "-95vw" || nav.style.left === "" ){
+				nav.style.left = "0px";
+				navtoggle.style.left = "80vw";
+			}
+			else{
+				nav.style.left = "-95vw";
+				navtoggle.style.left = "0px";
 			}
 
 		});
+
+		actionButton.addEventListener( "click", function(){
+			playSound( "tap.mp3" );
+
+			if( $('#loadedContentBox').is(":visible") ){
+				$('#ajaxLoadedContentClose').hide( 150 );
+				$('#loadedContentBox').slideUp( 300, function(){
+					$('#ajaxLoadedContent').html("");
+				});
+			}
+			else{
+
+				$( "#ajaxLoadedContent" ).load( "/new", function(){
+
+					$('#ajaxLoadedContent').show( 150 );
+					$('#ajaxLoadedContentClose').show( 150 );
+					$( "#loadedContentBox" ).slideDown( 300 );
+					initializeMap();
+
+					$('#newEventForm').submit(function(){
+
+						$(this).ajaxSubmit({
+
+							error: function(xhr) {
+
+							},
+
+							success: function(response) {
+								//TODO: We will fill this in later
+								if( response === '' ){
+									$('#ajaxLoadedContentClose').hide( 150 );
+									$( "#loadedContentBox" ).slideUp( 300 );
+									$( "#loadedContentBox" ).html( "" );
+									updateEvents();
+								}
+								else{
+									$('#ajaxLoadedContent').html(response, function(){
+										$('#ajaxLoadedContent').slideDown(300, function(){
+										});
+									});
+									$('#loadedContentBox').show();
+									initializeMap();
+								}
+							}
+						});
+
+						return false;
+
+					});
+
+				} );
+
+			}
+
+		});
+
+
+
+		/*
+		*	Checkboxen
+		*/
+
+		for(i = 0; i < dot.length; i++){
+			dot[i].addEventListener( "click", function(){
+				for(j = 0; j < dot.length; j++){
+					if( Object.is( this, dot[j] ) ){
+						checkbox[j].checked = !checkbox[j].checked;
+					}
+				}
+
+			});
+		}
+
 	}
 
 }());
