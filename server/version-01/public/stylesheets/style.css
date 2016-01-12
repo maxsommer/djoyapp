@@ -762,6 +762,7 @@ a.event{
             height: 100vh;
       }
       main.nonav{
+            position:absolute;
             left: 0vw;
             width: 100vw;
       }
