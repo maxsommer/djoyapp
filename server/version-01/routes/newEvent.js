@@ -11,7 +11,9 @@ var upload = multer({ dest: 'public/uploads/' });
 
 router.get('/', function(req, res, next) {
       if( req.user ){
-            res.render('newEvent', { layout:false, currentTime: moment().format("HH:mm") });
+            var now                 = moment().format("HH:mm");
+
+            res.render('newEvent', { layout:false, currentTime: now });
       }
       else{
             res.redirect('welcome');
@@ -33,10 +35,26 @@ router.post('/process', upload.single('image') ,function(req, res, next) {
             var eventImage          = req.file;
             var authorId            = req.user.id;
 
-            var time = moment().format('MM/DD/YYYY');
-            time += " " + eventTime;
 
-            eventTime = Date.parse( time )/1000;
+            //    korrekten zeitstempel errechnen
+                  //    wir verwenden den aktuellen tag als grundlage
+                  var time = moment().format('MM/DD/YYYY');
+                  console.log(time);
+
+                  //    falls die aktuelle uhrzeit "größer" ist als
+                  //    die eventzeit, bedeutet das, dass das event
+                  //    am nächsten tag stattfinden soll
+                  var currentHour   = Number(moment().format('HH'));
+                  var eventHour     = Number(eventTime.substr(0,2));
+                        if( currentHour > eventHour ){
+                              time = moment().add(1, 'day').format('MM/DD/YYYY');
+                              time = time + " " + eventTime;
+                        }
+                        else{
+                              time += " " + eventTime;
+                        }
+                  eventTime = Date.parse( time )/1000;
+
 
             if(
                   eventTitle === '' || eventDescription === '' ||
