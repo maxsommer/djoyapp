@@ -20,11 +20,11 @@ body{
 }
 
 nav{
-	position: absolute;
+	position: fixed;
 	display: block;
 
 	width: 80vw;
-	height: 100vh;
+	height: 100%;
 	top: 0px;
 	left: -95vw;
 	padding: 0.5rem;
@@ -213,9 +213,11 @@ a.event{
       width: 1rem;
       height: 1rem;
 
-      background-color: rgba(255, 0, 0, .8);
+      background-color: #ee4d59;
       border-radius: 100%;
       cursor: pointer;
+
+      z-index: 3;
 }
 
 #loadedContentBox{
@@ -225,10 +227,10 @@ a.event{
       width: 96vw;
       height: auto;
       left: 2vw;
-      top: 5vh;
+      top: 2vh;
       padding-top: 1rem;
       padding-bottom: 1rem;
-      margin-bottom: 5vh;
+      margin-bottom: 2vh;
 
       background-color: #efefef;
       border-radius: 2px;
@@ -358,7 +360,7 @@ a.event{
       left: 0px;
       top: 0px;
 
-      background-color: rgba(0,0,0,.5);
+      background-color: rgba(0,0,0,.7);
 
       z-index: 998;
 }
@@ -419,22 +421,33 @@ a.event{
       width : 96vw;
       height: auto;
       left: 2vw;
-      top: 5vh;
-      margin-bottom: 5vh;
+      top: 2vh;
+      margin-bottom: 2vh;
 
       background-color: #efefef;
-      color: #333;
       border-radius: 2px;
+
+      font-size: 1rem;
+      line-height: 1.2rem;
+      color: #aaa;
 
       z-index: 999;
 }
 #eventDetails p{
+      margin: 0;
+      padding-top: 0.5rem;
+      padding-bottom: 0.5rem;
       padding-left: 1rem;
       padding-right: 1rem;
-
-      font-size: 1rem;
-      line-height: 1.2rem;
-      color: #333;
+}
+#eventDetails .two-thirds{
+      color: #666;
+      padding-left: 1rem;
+      padding-right: 1rem;
+}
+#eventDetails .third{
+      padding-left: 1rem;
+      padding-right: 1rem;
 }
 #mapDetails{
       height: 20rem;
@@ -601,15 +614,139 @@ a.event{
       border-radius: 2px;
 }
 
+.attendEvent, .unattendEvent{
+      display: inline-block;
+      position: relative;
+      cursor: pointer;
+      float: right;
+
+      width: auto;
+      height: 3rem;
+      padding: 1rem;
+      padding-top: 0;
+      padding-bottom: 0;
+      margin-bottom: 1rem;
+      margin-right: 1rem;
+
+      background-color: #54CA41;
+      border-radius: 2px;
+      border: 1px solid #54CA41;
+
+      line-height: 3rem;
+      color: #efefef;
+      font-size: 1.25rem;
+      text-decoration: none;
+
+      transition: .25s;
+}.attendEvent:hover, .unattendEvent:hover{
+      background-color: #efefef;
+      color: #54CA41;
+      transition: .25s;
+}
+.unattendEvent{
+      background-color: #ee4d59;
+      border-radius: 2px;
+      border: 1px solid #ee4d59;
+}
+.unattendEvent:hover{
+      color: #ee4d59;
+}
+
+.spaceLeft{
+      display: inline-block;
+      position: relative;
+      float: left;
+      cursor: normal;
+
+      width: auto;
+      height: 3rem;
+      padding: 1rem;
+      padding-top: 0;
+      padding-bottom: 0;
+      margin-left: 1rem;
+      margin-bottom: 1rem;
+
+      background-color: #ee4d59;
+      border-radius: 2px;
+      border: 1px solid #ee4d59;
+
+      color: #efefef;
+      font-weight: 600;
+      text-align: center;
+      line-height: 3rem;
+}.spaceLeft b{
+      padding: 0.25rem;
+      background-color: #efefef;
+      color: #ee4d59;
+      border-radius: 2px;
+}
+
+#distance{
+      display: block;
+      position: absolute;
+
+      width: 90vw;
+      height: 90vw;
+      left: 5vw;
+      top: calc(50% - 45vw);
+
+      background-color: transparent;
+      border-radius: 100%;
+      border: 3px solid #ccc;
+
+      z-index: 1;
+}
+#distanceText{
+      display: block;
+      position: absolute;
+
+      width: 30%;
+      height: 3rem;
+      left: 35%;
+      bottom: 0px;
+      margin-bottom: -1.5rem;
+
+      background-color: #efefef;
+      border-radius: 100%;
+
+      text-align: center;
+      line-height: 3rem;
+      font-weight: 600;
+      font-size: 1rem;
+      color: #666;
+
+      z-index: 2;
+
+}
+
+#eventDetails .row{
+      padding-top: 0.5rem;
+      padding-bottom: 0.5rem;
+}
+
 @media only screen and (min-width: 769px){
+
+      #loadedContentBox, #eventDetails{
+            position: absolute;
+            width: 30rem;
+            left: calc(50vw - 15rem);
+      }
+
+      #distance{
+            width: 60vw;
+            height: 60vw;
+            left: 5vw;
+            top: calc( 50% - 30vw );
+      }
 
 	.dot{line-height: 16px;}
 
       nav{
+            position: fixed;
             display: block;
             width: 30vw;
             left: 0px;
-            min-width: 300px;
+            min-width: 265px;
       }
 
       #navtoggle{
@@ -617,7 +754,7 @@ a.event{
       }
 
       main{
-            position: absolute;
+            position: fixed;
             display: block;
             left: 30vw;
             top: 0px;
@@ -639,6 +776,13 @@ a.event{
 
 
 @media only screen and (min-width: 64rem){
+
+      #distance{
+            width: 60vw;
+            height: 60vw;
+            left: 7.5vw;
+            top: calc( 50% - 30vw );
+      }
 
       nav{
             width: 25vw;

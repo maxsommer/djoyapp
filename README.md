@@ -20,11 +20,21 @@ OSX: Open the terminal and navigate to the folder you saved the project in and r
 * Recommendations
 * Account Settings
 
-###Version ~0.2:
+##Done:
+####Version 0.23:
+* Attend at event
+* Maximum attandees at event
+* Radar functional overhaul
+* Redesign details page
+* Redesign radar
+* Fix: When clicking on event you just created, open it in ajax window
+* ~~My created events~~ (this will not be included in the prototype)
+* ~~Events I attended at~~ (this will not be included in the prototype)
+
+####Version 0.22:
 * Create new event: write user-id in db
 * Registration rules (minimal password length etc.)
 
-##Done:
 ####Version 0.21:
 * Added Fonts (Lato & Mission Script[for now the free version since we're not commercial])
 * Login restrictions

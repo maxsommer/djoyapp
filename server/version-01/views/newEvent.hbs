@@ -8,20 +8,29 @@
 <a id="loadedContentBoxCloseButton" onclick="javascript:closeLoadedContentBox();">x</a>
 
 <form id="newEventForm" enctype="multipart/form-data" action="/new/process" method="post">
-	<label for="title"><i class="fa fa-info fa-fw"></i>&nbsp;Titel:</label><br>
+	<label for="title"><i class="fa fa-question fa-fw"></i>&nbsp;Titel:</label><br>
 	<input autocomplete="off" type="text" name="title" value="" placeholder="Titel" required></input><br><br>
-	<label for="title"><i class="fa fa-question fa-fw"></i>&nbsp;Beschreibung:</label><br>
+
+	<label for="description"><i class="fa fa-info fa-fw"></i>&nbsp;Beschreibung:</label><br>
 	<textarea autocomplete="off" name="description" required maxlength="300" placeholder="Beschreibung"></textarea><br><br>
-	<label for="title"><i class="fa fa-credit-card fa-fw"></i>&nbsp;Preis:</label><br>
+
+	<label for="price"><i class="fa fa-credit-card fa-fw"></i>&nbsp;Preis:</label><br>
 	<input autocomplete="off" type="number" min="0" max="100" name="price" value="" placeholder="Preis in €"></input><br><br>
-	<label for="title"><i class="fa fa-clock-o fa-fw"></i>&nbsp;Zeit:</label><br>
+
+	<label for="time"><i class="fa fa-clock-o fa-fw"></i>&nbsp;Zeit:</label><br>
 	<input autocomplete="off" type="time" value="{{currentTime}}" name="time" required></input><br><br>
+
+	<label for="attendees"><i class="fa fa-users fa-fw"></i>&nbsp;Maximale Teilnehmer:</label><br>
+	<input autocomplete="off" type="number" min="1" max="100" name="attendees" value="" placeholder="Maximale Teilnehmer"></input><br><br>
+
 	<label for="mapnewevent"><i class="fa fa-map-marker fa-fw"></i>&nbsp;Ort:</label><br>
 	<div id="mapnewevent"></div><br><br>
 	<input type="hidden" name="lat" value="">
 	<input type="hidden" name="lng" value="">
+
 	<label for="mapnewevent"><i class="fa fa-picture-o fa-fw"></i>&nbsp;Bild:</label><br>
 	<input type="file" name="image" accept="image/*">
+
 	<input id="neweventsubmit" type="submit" value="Event erstellen">
 </form>
 

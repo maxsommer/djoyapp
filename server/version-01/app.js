@@ -15,6 +15,7 @@ var radar               = require('./routes/radar');
 var newEvent            = require('./routes/newEvent');
 var details             = require('./routes/details');
 var register            = require('./routes/register');
+var attend              = require('./routes/attend');
 
 var app = express();
 
@@ -49,6 +50,7 @@ app.use('/new', newEvent);
 app.use('/details', details);
 app.use('/register', register);
 app.get('/welcome', function(req,res,next){ res.render('welcome'); });
+app.use('/attend', attend);
 
 
 //    Login
@@ -79,11 +81,6 @@ passport.deserializeUser(function(id, done) {
     if (!row) return done(null, false);
     return done(null, row);
   });
-});
-
-// ...
-app.get('/login', function(req, res, next) {
-  res.render('login-form', { title: 'Djoya' });
 });
 
 app.post('/login', passport.authenticate('local', { successRedirect: '/radar',

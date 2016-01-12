@@ -19,7 +19,7 @@ router.get('/:int(\\d+)', function(req, res, next) {
 			}
 			else{
 
-				db.get("SELECT events.id AS id, events.name AS name, events.description AS description, events.price AS price, events.time AS time, events.locationLatitude AS locationLatitude, events.locationLongitude AS locationLongitude, events.authorId AS authorId, `events-media`.mediaId AS mediaId, media.type AS mediaType, media.filename AS mediaFileName FROM events, `events-media`, media WHERE events.id = ? AND `events-media`.`eventId` = ? AND `events-media`.`mediaId` = media.id;", [ id, id ], function(err, row){
+				db.get("SELECT events.id AS id, events.name AS name, events.description AS description, events.price AS price, events.time AS time, events.locationLatitude AS locationLatitude, events.locationLongitude AS locationLongitude, events.authorId AS authorId, events.maximumAttendances AS maximumAttendances, `events-media`.mediaId AS mediaId, media.type AS mediaType, media.filename AS mediaFileName FROM events, `events-media`, media WHERE events.id = ? AND `events-media`.`eventId` = ? AND `events-media`.`mediaId` = media.id;", [ id, id ], function(err, row){
 					if (err) {
 						console.log("Error: \n");
 						console.log( err.message + "\n " + err );
@@ -37,11 +37,35 @@ router.get('/:int(\\d+)', function(req, res, next) {
 							res.render('details', { layout:false, event: row });
 						}
 						else{
-								var ending = row.mediaFileName.split(".");
-								ending = ending[ (ending.length-1) ];
-								row.image = "event"+row.id+"-min."+ending;
-								row.time = moment.unix(row.time).format("Do MM YYYY, HH:mm");
-								res.render('details', { layout:false, event: row });
+								// nimmt der nutzer schon am event teil?
+								// dann soll der teilnahme absagen button kommen
+								db.get("SELECT count() AS count FROM `users-events` WHERE eventId = ? AND userId = ?", [ row.id , req.user.id ], function(err,data2){
+									if (err) {
+										console.log("Error: \n");
+										console.log( err.message + "\n " + err );
+									}
+									else{
+										if( data2.count >= 1 )	{ row.attending = true; }
+										else 				{ row.attending = false; }
+
+										//	wieviele leute dürfen noch teilnehmen?
+										db.get("SELECT count() AS count FROM `users-events` WHERE `eventId` = ?; ", [ row.id ], function(err, data3){
+
+											row.spaceLeft = Number(row.maximumAttendances) - Number(data3.count);
+
+											var ending = row.mediaFileName.split(".");
+											ending = ending[ (ending.length-1) ];
+											row.image = "event"+row.id+"-min."+ending;
+											row.time = moment.unix(row.time).format("dddd, HH:mm");
+											res.render('details', { layout:false, event: row });
+
+										});
+
+
+									}
+								});
+
+
 						}
 					}
 				});

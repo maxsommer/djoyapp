@@ -27,6 +27,7 @@ router.post('/process', upload.single('image') ,function(req, res, next) {
             var eventDescription 	= req.body.description;
             var eventPrice 		= req.body.price;
             var eventTime 		= req.body.time;
+            var eventAttendances 	= req.body.attendees;
             var eventLocationLat 	= req.body.lat;
             var eventLocationLng 	= req.body.lng;
             var eventImage          = req.file;
@@ -39,7 +40,7 @@ router.post('/process', upload.single('image') ,function(req, res, next) {
 
             if(
                   eventTitle === '' || eventDescription === '' ||
-                  eventTime === '' ||
+                  eventTime === '' || eventAttendances === '' ||
                   eventLocationLat === '' || eventLocationLng === '' ||
                   eventImage === '' || eventImage === 'undefined' || typeof eventImage === 'undefined'
             ){
@@ -61,7 +62,7 @@ router.post('/process', upload.single('image') ,function(req, res, next) {
 
                               var fileNameFull;
 
-                              db.run("INSERT INTO events ( name, description, price, time, locationLatitude, locationLongitude, authorId ) VALUES ( ?, ?, ?, ?, ?, ?, ? )", [ eventTitle, eventDescription, eventPrice, eventTime, eventLocationLat, eventLocationLng, authorId ], function(err){
+                              db.run("INSERT INTO events ( name, description, price, time, locationLatitude, locationLongitude, authorId, maximumAttendances ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ? )", [ eventTitle, eventDescription, eventPrice, eventTime, eventLocationLat, eventLocationLng, authorId, eventAttendances ], function(err){
                                     if (err) {
                                           console.log("Error: \n");
                                           console.log( err.message + "\n " + err );

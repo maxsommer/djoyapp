@@ -13,7 +13,7 @@
 		<p class="error"><i class="fa fa-exclamation-circle fa-fw"></i>Überprüfe bitte noch einmal ob du deine Anmeldedaten richtig eingegeben hast.</p>
 			<form action="/login" method="POST">
 				<input type="text" name="username" maxlength="20" placeholder="Benutzername" required autocomplete="off" autofocus<br>
-				<input type="password" name="password" placeholder="Passwort" required autocomplete="off"><br>
+				<input type="password" name="password" placeholder="Passwort" pattern=".{7,}" required autocomplete="off"><br>
 				<input type="submit" value="Anmelden"><br>
 			</form>
 		</div>

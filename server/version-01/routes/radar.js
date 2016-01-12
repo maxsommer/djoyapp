@@ -42,24 +42,46 @@ router.post('/', function(req, res, next) {
 			// verbindung zur datenbank aufbauen
 			var db = new sqlite3.Database('../database.db', function(error){
 
+
 				if(error != null){
 					console.log("Datenbankverbindung konnte nicht aufgebaut werden ");
 				}
 				else{
+				var results = [];
+				var rowsprocessed = 0;
+				var rowstobeprocessed = 0;
 
-					db.all("SELECT * FROM events WHERE locationLongitude < ? AND locationLongitude > ? AND locationLatitude < ? AND locationLatitude > ? AND time < ? AND time > ?", [ eastPosition.longitude, westPosition.longitude, northPosition.latitude, southPosition.latitude, filterTime, currentTime ], function(err, rows){
+					db.each("SELECT * FROM events WHERE locationLongitude < ? AND locationLongitude > ? AND locationLatitude < ? AND locationLatitude > ? AND time < ? AND time > ?;", [ eastPosition.longitude, westPosition.longitude, northPosition.latitude, southPosition.latitude, filterTime, currentTime ], function(err, row){
+
 						if (err) {
 							console.log("Error: \n");
 							console.log( err.message + "\n " + err );
 						}
 						else{
-							res.send( rows );
+							if( typeof row === 'undefined' ){
+								res.send( [] );
+							}
+							else{
+								db.get("SELECT count() AS count FROM `users-events` WHERE `eventId` = ?", [ row.id ], function(err, data4){
+									if( data4.count < row.maximumAttendances ){
+										results.push(row);
+									}
+									rowsprocessed++;
+									if( rowsprocessed === rowstobeprocessed ){
+										rowsprocessed = 0;
+										rowstobeprocessed = 0;
+										res.send(results);
+										db.close();
+									}
+								});
+
+							}
 						}
+					}, function(err, num){
+						rowstobeprocessed = num;
 					});
 
 				}
-
-				db.close();
 
 			});
 

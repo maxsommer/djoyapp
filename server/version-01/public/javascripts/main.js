@@ -5,8 +5,11 @@ var currentLocation = [];
 var currentLocationSet = false;
 var currentMarkers = [];
 var currentMarkerLocation = {};
+var directionsService;
+var directionsDisplay;
 var mapNewEvent;
 var mapDetails;
+var markerDetails;
 
 // create WebAudio API context
 var context = new AudioContext();
@@ -36,11 +39,8 @@ var newEventSubmit;
 	var currentURL = currentURL.split("/");
 	var currentPage = currentURL[ currentURL.length-1 ];
 
-	if( currentPage === 'radar')
-		updateLocation( updateEvents );
-
-
 	if( currentPage === 'radar' ){
+		updateLocation( updateEvents );
 
 		//	Echtzeitausführung
 		window.setInterval(function(){
@@ -122,12 +122,12 @@ var newEventSubmit;
 							},
 
 							success: function(response) {
-								//TODO: We will fill this in later
 								if( response === '' ){
 									$('#ajaxLoadedContentClose').hide( 150 );
 									$( "#loadedContentBox" ).slideUp( 300 );
 									$( "#loadedContentBox" ).html( "" );
 									updateEvents();
+
 								}
 								else{
 									$('#ajaxLoadedContent').html(response, function(){
@@ -319,7 +319,7 @@ function updateEvents(){
 									//var
 
 								//	 das Event wird auf dem Bildschirm hinzugefügt
-								eventContainer.innerHTML += "<a class=\"event\" href=\"/details/" + event.id + "\" style=\"left: "+ eventPositionScreenX +"%; bottom: "+ eventPositionScreenY +"%\"></a>";
+								eventContainer.innerHTML += "<a class=\"event\" onclick=\"javascript:openDetails("+event.id+");\" style=\"left: "+ eventPositionScreenX +"%; bottom: "+ eventPositionScreenY +"%\"></a>";
 
 								//	statusmeldung
 								console.log("Event #"+event.id+" wurde zur Karte hinzugefügt.");
@@ -457,13 +457,16 @@ function openDetails( id ){
 			locationDetails = JSON.parse( data );
 
 			if( locationDetails.lat != 0 || locationDetails.lng != 0 ){
+				  directionsService = new google.maps.DirectionsService;
+				  directionsDisplay = new google.maps.DirectionsRenderer;
 				mapDetails = new google.maps.Map(document.getElementById('mapDetails'), {
 				    center: {lat: locationDetails.lat, lng: locationDetails.lng},
 				    scrollwheel: false,
 				    zoom: 15
 				});
+  				directionsDisplay.setMap(mapDetails);
 				var myLatLng = new google.maps.LatLng(locationDetails.lat,locationDetails.lng);
-				var marker = new google.maps.Marker({
+				markerDetails = new google.maps.Marker({
 			    		position: myLatLng,
 			    		map: mapDetails
 			  	});
@@ -477,8 +480,66 @@ function openDetails( id ){
 	} );
 }
 
+function calculateAndDisplayRoute(directionsService, directionsDisplay, id) {
+	markerDetails.setMap(null);
+	var currentLatLng = new google.maps.LatLng(currentLocation.latitude,currentLocation.longitude);
+	$.get("/details/location/" + id, function(data){
+		locationDetails = JSON.parse( data );
+
+		  directionsService.route({
+		    origin: currentLatLng,
+		    destination: locationDetails,
+		    travelMode: google.maps.TravelMode.WALKING
+		  }, function(response, status) {
+		    if (status === google.maps.DirectionsStatus.OK) {
+		      directionsDisplay.setDirections(response);
+		    } else {
+		      window.alert('Directions request failed due to ' + status);
+		    }
+		  });
+	});
+}
+
 function closeLoadedContentBox(){
 	$('#ajaxLoadedContent').slideUp(150);
 	$('#ajaxLoadedContentClose').slideUp(150);
 	$('#ajaxLoadedContent').html("");
+}
+
+function attend(id){
+	$.get('/attend/' + id, function(){
+		//	aktueller stand:
+		//	button zum teilnehmen
+		if( $('#attendance').hasClass("attendEvent") ){
+			$('#attendance').html("Teilnahme absagen");
+			$('#attendance').removeClass("attendEvent");
+			$('#attendance').addClass("unattendEvent");
+			var x = document.querySelector(".spaceLeft");
+			x = x.childNodes[0];
+			x = Number(x.innerHTML) - 1;
+			$('.spaceLeft').html("<b>"+x+"</b> Plätze übrig");
+			$('#loadedContentBoxCloseButton').hide(150);
+			$('#ajaxLoadedContentClose').off("click");
+			calculateAndDisplayRoute(directionsService, directionsDisplay, id );
+		}
+		//	aktueller stand:
+		//	button zum absagen
+		else if( $('#attendance').hasClass("unattendEvent") ){
+			$('#attendance').html("Teilnehmen");
+			$('#attendance').removeClass("unattendEvent");
+			$('#attendance').addClass("attendEvent");
+			var x = document.querySelector(".spaceLeft");
+			x = x.childNodes[0];
+			x = Number(x.innerHTML) + 1;
+			$('.spaceLeft').html("<b>"+x+"</b> Plätze übrig");
+			$('#loadedContentBoxCloseButton').show(150);
+			$('#ajaxLoadedContentClose').click(function(){
+
+				$('#ajaxLoadedContentClose').hide( 150 );
+				$('#loadedContentBox').slideUp(300);
+				$('#eventDetails').slideUp(300);
+
+			});
+		}
+	} );
 }

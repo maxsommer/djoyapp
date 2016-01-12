@@ -28,7 +28,7 @@
 				{{#if registersuccess}}
 					autofocus
 				{{/if}}><br>
-				<input type="password" name="password" placeholder="Passwort" required autocomplete="off"><br>
+				<input type="password" name="password" placeholder="Passwort" pattern=".{7,}" required autocomplete="off"><br>
 				<input type="submit" value="Anmelden"><br>
 			</form>
 		</div>

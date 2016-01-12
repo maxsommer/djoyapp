@@ -7,19 +7,54 @@
 	</div>
 
 	<div>
-		<p>
-			{{event.description}}
-		</p>
-		{{#if event.price}}
-		<p>
-			{{ event.price }}€ Eintritt
-		</p>
-		{{/if}}
-		<p>
-			{{ event.time }}
-		</p>
 
+		<div class="row">
+			<div class="column third">
+				<i class="fa fa-info fa-fw"></i>Beschreibung:
+			</div>
+
+			<div class="column two-thirds">
+				{{event.description}}
+			</div>
+		</div>
+
+		<br>
+
+		{{#if event.price}}
+		<div class="row">
+			<div class="column third">
+				<i class="fa fa-credit-card fa-fw"></i>Preis:
+			</div>
+
+			<div class="column two-thirds">
+				{{ event.price }}€
+			</div>
+		</div>
+
+		<br>
+		{{/if}}
+
+		<div class="row">
+			<div class="column third">
+				<i class="fa fa-clock-o fa-fw"></i>Zeit:
+			</div>
+
+			<div class="column two-thirds">
+				{{ event.time }}
+			</div>
+		</div>
+
+		<br>
+
+		<p><i class="fa fa-map-marker fa-fw"></i>Ort:</p>
 		<div id="mapDetails"></div>
+		<div class="spaceLeft"><b>{{event.spaceLeft}}</b> Plätze übrig</div>
+		{{#unless event.attending}}
+		<a id="attendance" class="attendEvent" onclick="javascript: attend({{event.id}});">Teilnehmen</a>
+		{{/unless}}
+		{{#if event.attending}}
+		<a id="attendance" class="unattendEvent" onclick="javascript: attend({{event.id}});">Teilnahme absagen</a>
+		{{/if}}
 	</div>
 
 </div>
