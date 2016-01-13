@@ -50,6 +50,7 @@ app.use('/new', newEvent);
 app.use('/details', details);
 app.use('/register', register);
 app.get('/welcome', function(req,res,next){ res.render('welcome'); });
+app.get('/impress', function(req,res,next){ res.render('impress'); });
 app.use('/attend', attend);
 
 

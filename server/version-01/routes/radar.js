@@ -38,9 +38,10 @@ router.post('/', function(req, res, next) {
 		eastPosition.longitude 			= currentPosition.longitude + 0.015 * kilometerScale;
 		eastPosition.latitude 			= currentPosition.latitude;
 
-
 			// verbindung zur datenbank aufbauen
 			var db = new sqlite3.Database('../database.db', function(error){
+
+				//console.log("//POST req: Database connection works.");
 
 
 				if(error != null){
@@ -59,7 +60,7 @@ router.post('/', function(req, res, next) {
 						}
 						else{
 							if( typeof row === 'undefined' ){
-								res.send( [] );
+								res.send( "[]" );
 							}
 							else{
 								db.get("SELECT count() AS count FROM `users-events` WHERE `eventId` = ?", [ row.id ], function(err, data4){
@@ -71,7 +72,6 @@ router.post('/', function(req, res, next) {
 										rowsprocessed = 0;
 										rowstobeprocessed = 0;
 										res.send(results);
-										db.close();
 									}
 								});
 
@@ -79,15 +79,19 @@ router.post('/', function(req, res, next) {
 						}
 					}, function(err, num){
 						rowstobeprocessed = num;
+						if( num === 0 ){
+							res.send("[]");
+						}
 					});
 
 				}
 
 			});
+			db.close();
 
 	}
 	else{
-		res.redirect('welcome');
+		res.send( "[]" );
 	}
 
 
