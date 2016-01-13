@@ -9,7 +9,7 @@ Before trying to run the server please execute the following command in the dire
 
 ##How to run the server:  
 OSX: Open the terminal and navigate to the folder you saved the project in and run the following command:   
-``` DEBUG=version-01:* npm start ```  
+``` sudo PORT=80 npm start ```  
 
 ##To Do:
 ###Version ~0.4:
