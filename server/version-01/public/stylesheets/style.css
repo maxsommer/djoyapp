@@ -741,6 +741,11 @@ footer a{
       font-size: 1rem;
 }
 
+#impress{
+      margin-top: 5rem;
+}
+
+
 @media only screen and (min-width: 769px){
 
       #loadedContentBox, #eventDetails{
@@ -771,7 +776,7 @@ footer a{
       }
 
       main{
-            position: fixed;
+            position: absolute;
             display: block;
             left: 30vw;
             top: 0px;
@@ -787,6 +792,10 @@ footer a{
       #eventContainer{
             top: 0px;
             width: 70vw;
+      }
+
+      #impress{
+            margin-top: 0;
       }
 
 }

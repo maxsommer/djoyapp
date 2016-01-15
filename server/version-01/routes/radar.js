@@ -46,25 +46,33 @@ router.post('/', function(req, res, next) {
 
 				if(error != null){
 					console.log("Datenbankverbindung konnte nicht aufgebaut werden ");
+					db.close();
 				}
 				else{
 				var results = [];
 				var rowsprocessed = 0;
 				var rowstobeprocessed = 0;
 
-					db.each("SELECT * FROM events WHERE locationLongitude < ? AND locationLongitude > ? AND locationLatitude < ? AND locationLatitude > ? AND time < ? AND time > ?;", [ eastPosition.longitude, westPosition.longitude, northPosition.latitude, southPosition.latitude, filterTime, currentTime ], function(err, row){
+					db.each("SELECT * FROM `events` WHERE `locationLongitude` < ? AND `locationLongitude` > ? AND `locationLatitude` < ? AND `locationLatitude` > ? AND `time` < ? AND `time` > ?;", [ eastPosition.longitude, westPosition.longitude, northPosition.latitude, southPosition.latitude, filterTime, currentTime ], function(err, row){
 
 						if (err) {
 							console.log("Error: \n");
 							console.log( err.message + "\n " + err );
+							db.close();
 						}
 						else{
 							if( typeof row === 'undefined' ){
-								res.send( "[]" );
+								res.send( "" );
+								db.close();
 							}
 							else{
-								db.get("SELECT count() AS count FROM `users-events` WHERE `eventId` = ?", [ row.id ], function(err, data4){
-									if( data4.count < row.maximumAttendances ){
+								db.get("SELECT count() AS counter FROM `users-events` WHERE `eventId` = ?", [ row.id ], function(err, data4){
+									if(err){
+										console.log("Error: \n");
+										console.log( err.message + "\n " + err );
+										db.close();
+									}
+									if( data4.counter < row.maximumAttendances ){
 										results.push(row);
 									}
 									rowsprocessed++;
@@ -72,26 +80,30 @@ router.post('/', function(req, res, next) {
 										rowsprocessed = 0;
 										rowstobeprocessed = 0;
 										res.send(results);
+										db.close();
 									}
 								});
 
 							}
 						}
 					}, function(err, num){
+						if(err){
+							console.log("Error: \n");
+							console.log( err.message + "\n " + err );
+							db.close();
+						}
 						rowstobeprocessed = num;
 						if( num === 0 ){
-							res.send("[]");
+							res.send("");
 						}
 					});
 
 				}
 
 			});
-			db.close();
-
 	}
 	else{
-		res.send( "[]" );
+		res.send( "" );
 	}
 
 

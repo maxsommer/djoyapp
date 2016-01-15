@@ -39,6 +39,16 @@ var newEventSubmit;
 	var currentURL = currentURL.split("/");
 	var currentPage = currentURL[ currentURL.length-1 ];
 
+	$( window ).resize(function() {
+		if($( window ).width() > 769 ){
+  	  		$('nav').css({"left":"0"});
+	  	  	$('#navtoggle').css({"left":"95wv"});
+		}else{
+  	  		$('nav').css({"left":"-95vw"});
+	  	  	$('#navtoggle').css({"left":"0"});
+		}
+	});
+
 	if( currentPage === 'radar' ){
 		updateLocation( updateEvents );
 
@@ -77,7 +87,7 @@ var newEventSubmit;
 
 	});
 
-	if( currentPage === 'radar' ) {
+	if( currentPage === 'radar' || currentPage === 'impress' || currentPage === 'guide' ) {
 
 		/*
 		*	Öffnen der Navigation

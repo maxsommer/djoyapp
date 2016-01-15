@@ -49,8 +49,9 @@ app.use('/radar', radar);
 app.use('/new', newEvent);
 app.use('/details', details);
 app.use('/register', register);
-app.get('/welcome', function(req,res,next){ res.render('welcome'); });
-app.get('/impress', function(req,res,next){ res.render('impress'); });
+app.get('/welcome', function(req,res,next){ res.render('welcome', {title: "Djoya"}); });
+app.get('/guide', function(req,res,next){ res.render('guide', {title: "Djoya"}); });
+app.get('/impress', function(req,res,next){ res.render('impress', {title: "Djoya"}); });
 app.use('/attend', attend);
 
 

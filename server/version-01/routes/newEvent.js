@@ -39,7 +39,6 @@ router.post('/process', upload.single('image') ,function(req, res, next) {
             //    korrekten zeitstempel errechnen
                   //    wir verwenden den aktuellen tag als grundlage
                   var time = moment().format('MM/DD/YYYY');
-                  console.log(time);
 
                   //    falls die aktuelle uhrzeit "größer" ist als
                   //    die eventzeit, bedeutet das, dass das event
@@ -67,7 +66,6 @@ router.post('/process', upload.single('image') ,function(req, res, next) {
 
             }
             else{
-
                   //	hier muss ein wortfilter hin für eventname, beschreibung, etc.
 
                   // verbindung zur datenbank aufbauen
@@ -119,11 +117,9 @@ router.post('/process', upload.single('image') ,function(req, res, next) {
                               });
 
                         }
-
                         db.close();
 
                   });
-
                   res.send("");
             }
 
