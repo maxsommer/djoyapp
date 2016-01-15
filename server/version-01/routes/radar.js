@@ -62,7 +62,7 @@ router.post('/', function(req, res, next) {
 						}
 						else{
 							if( typeof row === 'undefined' ){
-								res.send( "" );
+								res.send( "[]" );
 								db.close();
 							}
 							else{
@@ -94,7 +94,7 @@ router.post('/', function(req, res, next) {
 						}
 						rowstobeprocessed = num;
 						if( num === 0 ){
-							res.send("");
+							res.send("[]");
 						}
 					});
 
@@ -103,7 +103,7 @@ router.post('/', function(req, res, next) {
 			});
 	}
 	else{
-		res.send( "" );
+		res.send( "[]" );
 	}
 
 

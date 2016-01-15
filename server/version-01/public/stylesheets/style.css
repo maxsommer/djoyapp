@@ -497,7 +497,7 @@ a.event{
 }
 #welcomeContainer{
       background-image: url('../images/djoya-background.jpg');
-      background-size: cover;;
+      background-size: cover;
       background-repeat: no-repeat;
       background-position: center;
       z-index: 10;
@@ -725,7 +725,7 @@ a.event{
 }
 
 footer{
-      display: block
+      display: block;
       position: relative;
 
       width: 100%;
