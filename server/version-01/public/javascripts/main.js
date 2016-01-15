@@ -165,7 +165,7 @@ var newEventSubmit;
 		/*
 		*	Checkboxen
 		*/
-
+		
 		for(i = 0; i < dot.length; i++){
 			dot[i].addEventListener( "click", function(){
 				for(j = 0; j < dot.length; j++){
