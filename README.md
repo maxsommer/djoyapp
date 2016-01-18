@@ -3,7 +3,8 @@ P3 course of IMD winter term 2015 / 2016.
 Igor Filipe, Isabella Roscher, Max Sommer, Olga Zimmermann  
 Djoya is going to be an app that helps you find out what to do here and right now.
 
-##Installation:
+##How to install the Djoya server:
+Clone the github repository into the folder of wish.
 Before trying to run the server please execute the following command in the directory of the server:  
 ``` npm install lwip --save ```
 
