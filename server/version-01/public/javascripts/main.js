@@ -231,7 +231,24 @@ function updateLocation( callback ){
 				callback();
 			}
 		}, function(error){
-			console.log(error);
+			switch(error.code) {
+		        case error.PERMISSION_DENIED:
+		            console.log("User denied the request for Geolocation.");
+				toggleLocationHint();
+		            break;
+		        case error.POSITION_UNAVAILABLE:
+		            console.log("Location information is unavailable.");
+				toggleLocationHint();
+		            break;
+		        case error.TIMEOUT:
+		            console.log("The request to get user location timed out.");
+				toggleLocationHint();
+		            break;
+		        case error.UNKNOWN_ERROR:
+		            console.log("An unknown error occurred.");
+				toggleLocationHint();
+		            break;
+    			}
 		});
     	} else {
 	  	meSymbolText.innerHTML = "Geolocation is not supported by this browser.";
@@ -554,4 +571,23 @@ function attend(id){
 			});
 		}
 	} );
+}
+
+function toggleLocationHint(){
+	if( $('#locationHint').is('visible') ){
+		$('#locationHint').slideUp(150);
+		$('#ajaxLoadedContentClose').slideUp(150);
+		$('#ajaxLoadedContentClose').click(function(){
+
+			$('#ajaxLoadedContentClose').hide( 150 );
+			$('#loadedContentBox').slideUp(300);
+			$('#eventDetails').slideUp(300);
+
+		});
+	}
+	else{
+		$('#locationHint').slideDown(150);
+		$('#ajaxLoadedContentClose').slideDown(150);
+		$('#ajaxLoadedContentClose').off("click");
+	}
 }

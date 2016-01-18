@@ -745,6 +745,34 @@ footer a{
       margin-top: 5rem;
 }
 
+#locationHint{
+      display: none;
+      position: fixed;
+
+      width: 20rem;
+      height: 20rem;
+      left: calc(50vw - 10rem);
+      top: calc(50vh - 10rem);
+      padding: 2rem;
+
+      background-color: rgba(238, 77, 89, .95);
+      border-radius: 2px;
+      text-align: center;
+      font-size: 2rem;
+      color: #efefef;
+      box-shadow: 0px 2px 7px rgba(0,0,0,.15);
+
+      z-index: 999;
+}
+#locationHint i{
+      background-color: #efefef;
+      width: 5rem;
+      height: 5rem;
+      border-radius: 100%;
+      color: rgba(238, 77, 89, 1);
+      line-height: 5rem;
+}
+
 
 @media only screen and (min-width: 769px){
 
