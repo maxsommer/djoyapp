@@ -7,9 +7,31 @@ Djoya is going to be an app that helps you find out what to do here and right no
 Before trying to run the server please execute the following command in the directory of the server:  
 ``` npm install lwip --save ```
 
+##How to update the Djoya server:
+* ssh into the server
+* reactivate the running screen session
+* run ``` git fetch --all ```
+* run ``` git reset origin/master --hard ```
+* run ``` npm install lwip --save ```
+* run ``` sudo PORT=80 npm start ```
+
 ##How to run the server:  
 OSX: Open the terminal and navigate to the folder you saved the project in and run the following command:   
 ``` sudo PORT=80 npm start ```  
+
+##How to access Djoya:
+**Mobile:** 
+  * Open your web browser (propably Chrome/Safari)
+  * Navigate to http://djoya.de/
+  * Pin the website to your homescreen
+  * Now if you open it via the icon on your homescreen Djoya should act as an app
+**Desktop:**
+  * Just open http://djoya.de/ in your web browser
+
+##Requirements for use as a consumer:
+* Register a new account and log in
+* Enable location services for Djoya
+* Have fun
 
 ##To Do:
 
