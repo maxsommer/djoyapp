@@ -15,6 +15,7 @@ Before trying to run the server please execute the following command in the dire
 * run ``` git reset origin/master --hard ```
 * run ``` npm install lwip --save ```
 * run ``` sudo PORT=80 npm start ```
+* logout of the activated screen session by typing these characters in succession ``` [ENTER] ~ . ```
 
 ##How to run the server:  
 OSX: Open the terminal and navigate to the folder you saved the project in and run the following command:   
