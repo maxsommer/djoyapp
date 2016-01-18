@@ -27,6 +27,7 @@ OSX: Open the terminal and navigate to the folder you saved the project in and r
   * Navigate to http://djoya.de/
   * Pin the website to your homescreen
   * Now if you open it via the icon on your homescreen Djoya should act as an app  
+ 
 **Desktop:**
   * Just open http://djoya.de/ in your web browser
 
