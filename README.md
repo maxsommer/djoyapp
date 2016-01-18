@@ -39,7 +39,7 @@ OSX: Open the terminal and navigate to the folder you saved the project in and r
 ##To Do:
 
 ###Version ~0.3:
-* Introduction / Tutorial (this will not be included in the prototype)
+* Introduction / Tutorial
 * ~~Recommendations~~ (this will not be included in the prototype)
 * ~~Account settings~~ (this will not be included in the prototype)
 * ~~My created events~~ (this will not be included in the prototype)
