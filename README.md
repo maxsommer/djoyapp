@@ -40,8 +40,14 @@ OSX: Open the terminal and navigate to the folder you saved the project in and r
 
 ###Version ~0.3:
 * Recommendations
-* Account Settings
+* Account settings
 * Introduction / Tutorial
+* ~~My created events~~ (this will not be included in the prototype)
+* ~~Events I attended at~~ (this will not be included in the prototype)
+* ~~Private sharing~~ (this will not be included in the prototype)
+* ~~Privatesphere option~~ (this will not be included in the prototype)
+* ~~Multilanguage support~~ (this will not be included in the prototype)
+* ~~Scaling up the search radius in case there are no events in multiple levels (up to 2km)~~ (this will not be included in the prototype)
 
 ##Done:
 ####Version 0.24:
@@ -54,8 +60,6 @@ OSX: Open the terminal and navigate to the folder you saved the project in and r
 * Redesign details page
 * Redesign radar
 * Fix: When clicking on event you just created, open it in ajax window
-* ~~My created events~~ (this will not be included in the prototype)
-* ~~Events I attended at~~ (this will not be included in the prototype)
 
 ####Version 0.22:
 * Create new event: write user-id in db
@@ -77,7 +81,6 @@ OSX: Open the terminal and navigate to the folder you saved the project in and r
 ####Version 0.153:
 * Fixes
 * UI Tweaks
-* ~~Share~~
 
 ####Version 0.152:
 * Fixed UI Bugs
