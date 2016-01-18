@@ -19,6 +19,9 @@ OSX: Open the terminal and navigate to the folder you saved the project in and r
 * Introduction / Tutorial
 
 ##Done:
+####Version 0.24:
+* If location is turned off or denied Djoya now displays a hint to enable it.
+
 ####Version 0.23:
 * Attend at event
 * Maximum attandees at event
