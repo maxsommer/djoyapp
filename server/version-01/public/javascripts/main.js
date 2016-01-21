@@ -78,6 +78,9 @@ var newEventSubmit;
 
 	}
 
+	$(document).ready(function(){
+	  $('.bxslider').bxSlider();
+	});
 
 	$('#ajaxLoadedContentClose').click(function(){
 
@@ -591,3 +594,4 @@ function toggleLocationHint(){
 		$('#ajaxLoadedContentClose').off("click");
 	}
 }
+

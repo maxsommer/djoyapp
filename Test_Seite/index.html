@@ -7,29 +7,43 @@
 	<link rel="shortcut icon" href="bilder/favicon.ico">
     <title>Djoya - Endjoyaself!</title>
     <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+
 </head>
 <body>
-	<div id="main">
-		<nav class="clearfix">
-			<ul class="clearfix">
-				<li><a href="login.html">Login</a></li>
-				<li><a href="radar.html">Radar</a></li>
-				<li><a href="meinprofil.html">Mein Profil</a></li>
-		        <li><a href="index.html">Tutorial</a></li>
-		        <li><a href="events.html">Meine Events</a></li>
-			</ul>
-			<a href="#" id="pull">Djoya</a>
-		</nav>
-		
-		<div id="logo"></div>
-		<div id="description">
-			<img src="bilder/logo.png" alt="Djoya" height="50%" width="50%">
-			<h2>Djoya ist die App, die dich ins Hier und Jetzt bringt.</h2>
-			<p>Du willst immer auf dem Laufenden sein und wissen,
-			<br> was in deiner Nähe geht? <br> Dann ist Djoya genau das
-			richtige für dich!</p>
-			<button id="go" onclick="nextPage()">Los geht's!</button>
+	<nav class="clearfix">
+		<ul class="clearfix">
+			<li><a href="login.html">Login</a></li>
+			<li><a href="radar.html">Radar</a></li>
+			<li><a href="meinprofil.html">Mein Profil</a></li>
+	        <li><a href="index.html">Tutorial</a></li>
+	        <li><a href="events.html">Meine Events</a></li>
+		</ul>
+		<a href="#" id="pull">Djoya</a>
+	</nav>
+	<div class="container">
+		<div class="slider">
+		  <ul>
+			  <li><img  src="bilder/tutorial1400.jpg"></li>
+			  <li><img  src="bilder/tutorial2400.jpg"></li>
+			  <li><img  src="bilder/tutorial3400.jpg"></li>
+		  </ul>
+		  <button class="prev">prev</button>
+		  <button class="next">next</button>
 		</div>
+	</div>
+	<div class="button-container">
+		<button class="circle0 active"></button>
+		<button class="circle1"></button>
+		<button class="circle2"></button>
+	</div>
+
+	<div id="description">
+		<!--
+		<h2>Djoya ist die App, die dich ins Hier und Jetzt bringt.</h2>
+		<p>Du willst immer auf dem Laufenden sein und wissen,
+		<br> was in deiner Nähe geht? <br> Dann ist Djoya genau das
+		richtige für dich!</p> -->
+		<button id="go" onclick="nextPage()">Los geht's!</button>
 	</div>
 	<div class="footer">
 		<a href="impressum.html">Impressum |</a>
@@ -38,7 +52,8 @@
 		<a href="ueberuns.html">Über Uns</a>
 	</div>
 
-	<script type="text/javascript" src="jquery-2.1.4.js"></script>
-	<script src="javascriptfile.js"></script>
+	<script type="text/javascript" src="js/jquery-2.1.4.js"></script>
+	<script src="js/javascriptfile.js"></script>
+	</script>
 </body>
 </html>
